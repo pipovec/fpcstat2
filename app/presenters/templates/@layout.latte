@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="Statistiky pre klan FPC">
+    <meta name="author" content="Boris Fekar">
+
+	  <link rel=icon href="{$basePath}/images/predator1.png" sizes="16x16" type="image/png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	  <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{$basePath}/css/mystyle.css" >
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+
+    <!-- Piwik -->
+      <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(["setDomains", ["*.www.fpcstat.cz","*.fpcstat.cz"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//piwik.fpclan.cz/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId', '1']);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      </script>
+    <!-- End Piwik Code -->
+
+{include #head}
+</head>
+
+<body>
+<!-- Piwik Image Tracker -->
+<noscript><img src="https://piwik.fpclan.cz/piwik.php?idsite=1&rec=1" style="border:0" alt="" /></noscript>
+<!-- End Piwik -->
+
+<div class="container-fluid">
+<!-- Hlavne menu -->
+<div class="row" style="padding-bottom: 25px">
+<nav class="navbar navbar-default navbar-fixed-top  ">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" n:href="Homepage:">FPC stat</a>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+      <li>
+        <a n:href="Homepage:">Domov</a>
+      </li>
+
+      <li class="dropdown">
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Hraci<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <!--<li><a n:href="InfoHrac:">Informacie o hracovi</a></li>-->
+            <li><a n:href="Odchody:">Odchody z klanov</a></li>
+            <li><a n:href="RebricekHraci:rebricekwn8">Rebricek WN8</a></li>
+            <li><a n:href="RebricekHraci:rebricekgr">Rebricek GR</a></li>
+	    <li><a n:href="Nabor:">Nabor</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Klany<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a n:href="CzSkKlany:">Zoznam klanov Cz/Sk</a></li>
+            <li><a n:href="RebricekKlany:">Rebríčky klanov Cz/Sk</a></li>
+            <li><a n:href="RebricekKlany:wn8random">Rebríček klanov Cz/Sk WN8</a></li>
+          </ul>
+        </li>
+
+        <!-- Online Char -->
+        <li><a n:href="Chat:">Online Chat</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Registracia</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Prihlas</a></li>
+        </ul>
+    </div>
+
+
+</nav>
+</div>
+
+<!-- Tu sa budu natahovat udaje s template -->
+{include content}
+
+
+</body>
+</html>

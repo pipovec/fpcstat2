@@ -1,0 +1,102 @@
+{* Latte template *}
+
+
+
+<div id="gr" style="width:1000px; height:300px; margin-left: auto; margin-right: auto;">
+    
+ <script src="{$basePath}/js/Highcharts/js/highcharts.js"></script>   
+ <script src="{$basePath}/js/Highcharts/js/modules/exporting.js"></script> 
+ 
+ <script>
+ $(function () {
+    $('#gr').highcharts({
+        chart: {
+            type: 'areaspline'
+        },
+        title: {
+            text: 'Global Rating'
+        },
+        subtitle: {
+            text: 'História global rating'
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                month: '%e. %b',
+                year: '%b'
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Global rating'
+            },
+            min: <?php echo $grmin?>
+        },
+        
+
+        series: [{
+            
+            name: 'Global rating',
+            data: [
+                        <?php echo join($gr, ', ') ?>
+                  ],
+            color: '#919191'
+        }]
+    });
+});
+ </script>
+ </div>
+ 
+ <div id="place" style="width:1000px; height:300px; margin-left: auto; margin-right: auto;">
+    
+  
+    
+ 
+ <script>
+ $(function () {
+    $('#place').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'Poradie'
+        },
+        subtitle: {
+            text: 'História poradia'
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                month: '%e. %b',
+                year: '%b'
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Poradie'
+            },
+            min: <?php echo $plmin ?>,
+            reversed: true,
+            
+        },
+            
+
+        series: [{
+            
+            name: 'Poradie',
+            data: [
+                        <?php echo join($place, ', ') ?>
+                  ],
+          color: '#919191'
+        }]
+    });
+});
+ </script>
+ </div>
+ 

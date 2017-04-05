@@ -1,0 +1,195 @@
+{block content}
+<div class="row">
+    <div class="row col-sm-2  table-responsive">
+        <table>
+            <tr><td><strong>{$info['nickname']} [{$info['clan_id']}]</strong></td></tr> 
+            <tr><td>Global rating: </td><td  class="text-right">{$info['global_rating']} </td></tr>
+            <tr><td>Client language:</td><td  class="text-right"> {$info['client_language']}</td></tr>
+            <tr><td>WN8:</td><td class="text-right" style="background-color:{$wn8['color']|noescape};color: black;">{$wn8['wn8']}</td></tr>
+        </table>
+    </div>
+
+    <div class="row col-sm-6 small table-responsive">
+    <table class="table table-bordered table-striped ">
+        <thead>
+            <tr style="col-sm-6">
+                <th class="text-center">Učet vytvorený</th>
+                <th class="text-center">Posledná bitka</th>
+                <th class="text-center">Posledna aktualizácia</th>
+                <th class="text-center">Odhlásený</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">{$info['created_at']|date:'%d.%m.%Y %H:%M:%S'} </td>
+                <td class="text-center">{$info['last_battle_time']|date:'%d.%m.%Y %H:%M:%S'}</td>
+                <td class="text-center">{$info['updated_at']|date:'%d.%m.%Y %H:%M:%S'} </td>
+                <td class="text-center">{$info['logout_at']|date:'%d.%m.%Y %H:%M:%S'}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="row">
+    
+    <div class="col-sm-8 small table-responsive">
+    
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th ></th>
+            <th class="text-center" >Bitiek</th>
+            <th class="text-center">Víťazstiev</th>
+            <th class="text-center">Prehier</th>
+            <th class="text-center">Remíz</th>
+            <th class="text-center">Prežitých</th>
+            <th class="text-center">Frags</th>
+            <th class="text-center">DMG</th>
+            <th class="text-center">Výstrelov</th>
+            <th class="text-center">Percento zásahov</th>
+            <th class="text-center">CP</th>
+            <th class="text-center">DCP</th>
+            <th class="text-center">priemerne XP za bitku</th>
+        </tr>
+
+        <tr>
+            <th >Celkom</th>
+            <td class="text-center">{$all['battles']}</td>
+            <td class="text-center">{$all['wins']/$all['battles']*100|number:3} %</td>
+            <td class="text-center">{$all['losses']/$all['battles']*100|number:2} %</td>
+            <td class="text-center">{$all['draws']/$all['battles']*100|number:2} %</td>
+            <td class="text-center">{$all['survived_battles']/$all['battles']*100|number:2} %</td>
+            <td class="text-center">{$all['frags']/($all['battles'] - $all['survived_battles'] )|number:2}</td>
+            <td class="text-center">{$all['damage_dealt']/$all['damage_received']|number:2}</td>
+            <td class="text-center">{$all['shots']}</td>
+            <td class="text-center">{$all['hits_percents']} %</td>
+            <td class="text-center">{$all['capture_points']}</td>
+            <td class="text-center">{$all['dropped_capture_points']}</td>
+            <td class="text-center">{$all['xp']/ $all['battles']|number:0}</td>
+
+        </tr>
+
+        <tr>
+            <th >v CW starych</th>
+            <td class="text-center">{$clan['battles']|number:0}</td>
+            <td class="text-center">{$clan['wins']/$clan['battles']*100|number:3} %</td>
+            <td class="text-center">{$clan['losses']/$clan['battles']*100|number:2} %</td>
+            <td class="text-center">{$clan['draws']/$clan['battles']*100|number:2} %</td>
+            <td class="text-center">{$clan['survived_battles']/$clan['battles']*100|number:2} %</td>
+            <td class="text-center">{$clan['frags']/($clan['battles'] - $clan['survived_battles'] )|number:2}</td>
+            <td class="text-center">{$clan['damage_dealt']/$clan['damage_received']|number:2}</td>
+            <td class="text-center">{$clan['shots']}</td>
+            <td class="text-center">{$clan['hits_percents']} %</td>
+            <td class="text-center">{$clan['capture_points']}</td>
+            <td class="text-center">{$clan['dropped_capture_points']}</td>
+            <td class="text-center">{$clan['xp']/ $clan['battles']|number:0}</td>
+
+        </tr>
+
+        <tr>
+            <th >v CW X</th>
+            <td class="text-center">{$absolute['battles']|number:0}</td>
+            <td class="text-center">{$absolute['wins']/$absolute['battles']*100|number:3} %</td>
+            <td class="text-center">{$absolute['losses']/$absolute['battles']*100|number:2} %</td>
+            <td class="text-center">{$absolute['draws']/$absolute['battles']*100|number:2} %</td>
+            <td class="text-center">{$absolute['survived_battles']/$absolute['battles']*100|number:2} %</td>
+            <td class="text-center">{$absolute['frags']/($absolute['battles'] - $absolute['survived_battles'] )|number:2}</td>
+            <td class="text-center">{$absolute['damage_dealt']/$absolute['damage_received']|number:2}</td>
+            <td class="text-center">{$absolute['shots']}</td>
+            <td class="text-center">{$absolute['hits_percents']} %</td>
+            <td class="text-center">{$absolute['capture_points']}</td>
+            <td class="text-center">{$absolute['dropped_capture_points']}</td>
+            <td class="text-center">{$absolute['xp']/ $absolute['battles']|number:0}</td>
+
+        </tr>
+
+        <tr>
+            <th >v CW VIII</th>
+            <td class="text-center">{$champion['battles']|number:0}</td>
+            <td class="text-center">{$champion['wins']/$champion['battles']*100|number:3} %</td>
+            <td class="text-center">{$champion['losses']/$champion['battles']*100|number:2} %</td>
+            <td class="text-center">{$champion['draws']/$champion['battles']*100|number:2} %</td>
+            <td class="text-center">{$champion['survived_battles']/$champion['battles']*100|number:2} %</td>
+            <td class="text-center">{$champion['frags']/($champion['battles'] - $champion['survived_battles'] )|number:2}</td>
+            <td class="text-center">{$champion['damage_dealt']/$champion['damage_received']|number:2}</td>
+            <td class="text-center">{$champion['shots']}</td>
+            <td class="text-center">{$champion['hits_percents']} %</td>
+            <td class="text-center">{$champion['capture_points']}</td>
+            <td class="text-center">{$champion['dropped_capture_points']}</td>
+            <td class="text-center">{$champion['xp']/ $champion['battles']|number:0}</td>
+
+        </tr>
+
+        <tr>
+            <th >v CW VI</th>
+            <td class="text-center">{$middle['battles']|number:0}</td>
+            <td class="text-center">{$middle['wins']/$middle['battles']*100|number:3} %</td>
+            <td class="text-center">{$middle['losses']/$middle['battles']*100|number:2} %</td>
+            <td class="text-center">{$middle['draws']/$middle['battles']*100|number:2} %</td>
+            <td class="text-center">{$middle['survived_battles']/$middle['battles']*100|number:2} %</td>
+            <td class="text-center">{$middle['frags']/($middle['battles'] - $middle['survived_battles'] )|number:2}</td>
+            <td class="text-center">{$middle['damage_dealt']/$middle['damage_received']|number:2}</td>
+            <td class="text-center">{$middle['shots']}</td>
+            <td class="text-center">{$middle['hits_percents']} %</td>
+            <td class="text-center">{$middle['capture_points']}</td>
+            <td class="text-center">{$middle['dropped_capture_points']}</td>
+            <td class="text-center">{$middle['xp']/ $middle['battles']|number:0}</td>
+
+        </tr>
+
+
+        <tr>
+            <th >v Rotách</th>
+            <td class="text-center">{$company['battles']|number:0}</td>
+            <td class="text-center">{$company['wins']/$company['battles']*100|number:3} %</td>
+            <td class="text-center">{$company['losses']/$company['battles']*100|number:2} %</td>
+            <td class="text-center">{$company['draws']/$company['battles']*100|number:2} %</td>
+            <td class="text-center">{$company['survived_battles']/$company['battles']*100|number:2} %</td>
+            <td class="text-center">{$company['frags']/($company['battles'] - $company['survived_battles'] )|number:2}</td>
+            <td class="text-center">{$company['damage_dealt']/$company['damage_received']|number:2}</td>
+            <td class="text-center">{$company['shots']}</td>
+            <td class="text-center">{$company['hits_percents']} %</td>
+            <td class="text-center">{$company['capture_points']}</td>
+            <td class="text-center">{$company['dropped_capture_points']}</td>
+            <td class="text-center">{$company['xp']/ $company['battles']|number:0}</td>
+
+        </tr>
+
+        <tr>
+            <th >Strongholdy</th>
+            <td class="text-center">{$shdefense['battles']|number:0}</td>
+            <td class="text-center">{$shdefense['wins']/$shdefense['battles']*100|number:3} %</td>
+            <td class="text-center">{$shdefense['losses']/$shdefense['battles']*100|number:2} %</td>
+            <td class="text-center">{$shdefense['draws']/$shdefense['battles']*100|number:2} %</td>
+            <td class="text-center">{$shdefense['survived_battles']/$shdefense['battles']*100|number:2} %</td>
+            <td class="text-center">{$shdefense['frags']/($shdefense['battles'] - $shdefense['survived_battles'] )|number:2}</td>
+            <td class="text-center">{$shdefense['damage_dealt']/$shdefense['damage_received']|number:2}</td>
+            <td class="text-center">{$shdefense['shots']}</td>
+            <td class="text-center">{$shdefense['hits_percents']} %</td>
+            <td class="text-center">{$shdefense['capture_points']}</td>
+            <td class="text-center">{$shdefense['dropped_capture_points']}</td>
+            <td class="text-center">{$shdefense['xp']/ $shdefense['battles']|number:0}</td>
+
+        </tr>
+
+        <tr>
+            <th >Šarvátky</th>
+            <td class="text-center">{$skirmish['battles']|number:0}</td>
+            <td class="text-center">{$skirmish['wins']/$skirmish['battles']*100|number:3} %</td>
+            <td class="text-center">{$skirmish['losses']/$skirmish['battles']*100|number:2} %</td>
+            <td class="text-center">{$skirmish['draws']/$skirmish['battles']*100|number:2} %</td>
+            <td class="text-center">{$skirmish['survived_battles']/$skirmish['battles']*100|number:2} %</td>
+            <td class="text-center">{$skirmish['frags']/($skirmish['battles'] - $skirmish['survived_battles'] )|number:2}</td>
+            <td class="text-center">{$skirmish['damage_dealt']/$skirmish['damage_received']|number:2}</td>
+            <td class="text-center">{$skirmish['shots']}</td>
+            <td class="text-center">{$skirmish['hits_percents']} %</td>
+            <td class="text-center">{$skirmish['capture_points']}</td>
+            <td class="text-center">{$skirmish['dropped_capture_points']}</td>
+            <td class="text-center">{$skirmish['xp']/ $skirmish['battles']|number:0}</td>
+
+        </tr>
+    </table>
+    </div>
+</div>
+                    
+{/block}

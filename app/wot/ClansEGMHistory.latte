@@ -1,0 +1,89 @@
+{* Latte template *}
+<div id="eGM" style="width:1000px; height:300px; margin-left: auto; margin-right: auto;">
+    
+ <script src="{$basePath}/js/Highcharts/js/highcharts.js"></script>   
+ <script src="{$basePath}/js/Highcharts/js/modules/exporting.js"></script> 
+ 
+ <script>
+ $(function () {
+    $('#eGM').highcharts({
+        chart: {
+            type: 'areaspline'
+        },
+        title: {
+            text: 'Hodnotenie podľa eGM'
+        },
+        subtitle: {
+            text: 'História hodnotenia úspechov na mape klanu <?php echo $name;?>'
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                month: '%e. %b',
+                year: '%b'
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'eGM'
+            },
+            min: <?php echo $egmmin?>
+        },
+        
+
+        series: [{
+            name: 'eGM',
+            data: [<?php echo join($egm, ', ') ?>],
+            color: '#919191'
+        }]
+    });
+});
+ </script>
+ </div>
+ 
+ <div id="eGMplace" style="width:1000px; height:300px; margin-left: auto; margin-right: auto;">
+ 
+ <script src="{$basePath}/js/Highcharts/js/highcharts.js"></script>  
+ <script>
+ $(function () {
+    $('#eGMplace').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: 'História umiestnenia v rebríčku Cz/Sk klanov pre klan <?php echo $name;?>'
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                month: '%e. %b',
+                year: '%b'
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Poradie'
+            },
+            min: <?php echo $egmminplace?>,
+            reversed: true,
+        },
+        
+
+        series: [{
+            name: 'Poradie',
+            data: [<?php echo join($egmplace, ', ') ?>],
+            color: '#919191'
+        }]
+    });
+});
+ </script>
+ </div>

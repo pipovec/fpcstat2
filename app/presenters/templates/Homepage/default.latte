@@ -1,0 +1,237 @@
+{block head}
+<title>Home Stranky o hracoch a klanoch WOT </title>
+
+{/block}
+
+
+{block content}
+
+<div class="row bg-warning" style="padding-bottom:10">
+
+
+<div class="jumbotron text-center" style="margin-top: 50px;">
+    <h1>FPC stat</h1>
+    <p>Štatistika o hráčoch a klanoch hry World of Tanks</p>
+</div>
+
+
+    <div class="col-sm-4">
+	    <div class="well">
+			<a n:href="RebricekHraci:rebricekgr">
+	    		<p><strong>Najlepší Cz/Sk hráči - Global Rating</strong></p>
+	    	</a>
+		  	<div class="table-responsive">
+	      	<table class=" table table-striped table-condensed responsive">
+	      		{foreach $gr as $data}
+            		<tr>
+           			{breakIf $iterator->counter == 6}
+           			<td>{$iterator->counter}.</td>
+           			<td>{$data->nickname}</td>
+           			<td>{$data->abbreviation}</td>
+           			<td>{$data->global_rating}</td>
+           			</tr>
+           		{/foreach}
+           	</table>
+           	</div>
+           	<p>Celkom: {$cgr->count}</p>
+	    </div>
+    </div>
+
+
+
+
+    <div class="col-sm-4">
+	    <div class="well">
+		  <a n:href="RebricekHraci:rebricekwn8">
+	      <p><strong>Najlepší Cz/Sk hráči - WN8</strong></p>
+		  </a>
+	      <div class="table-responsive">
+	      <table class=" table table-striped table-condensed responsive">
+	      	{foreach $wn8 as $data}
+            <tr>
+           		{breakIf $iterator->counter == 6}
+           		<td>{$iterator->counter}.</td>
+           		<td>{$data->nickname}</td>
+           		<td>{$data->abbreviation}</td>
+           		<td>{$data->wn8}</td>
+           	</tr>
+           	{/foreach}
+           	</table>
+           	</div>
+           	<p>Celkom: {$cwn8->count}</p>
+	    </div>
+    </div>
+
+
+    <div></div>
+
+
+    <div class="col-sm-4">
+	    <div class="well">
+		  <a n:href="Odchody:">
+	      <p><strong>Dnešné odchody z klanov</strong></p>
+		  </a>
+	     	<div class="table-responsive">
+	     	<table class=" table table-striped table-condensed responsive">
+	      	{foreach $odchody as $data}
+            <tr>
+           		{breakIf $iterator->counter == 6}
+           		<td>{$iterator->counter}.</td>
+           		<td>{$data->nickname}</td>
+           		<td>{$data->abbreviation}</td>
+           		<td>{$data->wn8}</td>
+           		<td>{$data->global_rating}</td>
+           	</tr>
+           	{/foreach}
+           	</table>
+           	</div>
+           	<p>Celkom: {$codchody->count}</p>
+	    </div>
+    </div>
+
+</div>
+
+<div class="row bg-warning">
+
+	<div class="col-sm-4">
+		<div class="well">
+		<a n:href="CzSkKlany:">
+			<p><strong>Najnovšie Cz/Sk klany</strong></p>
+		</a>
+		<div class="table-responsive">
+			<table class=" table table-striped table-condensed responsive">
+				{foreach $clans as $data}
+				<tr>
+					<td><img src="{$data->emblems_small}"></td>
+					<td>{$data->abbreviation}</td>
+					<td>{$data->name}</td>
+					<td>{$data->created_at|date:'%d.%m.%Y'}</td>
+				</tr>
+				{/foreach}
+			</table>
+		</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="well">
+		<a n:href="RebricekKlany:"> <!-- http://new.fpcstat.cz/rebricek-klany/?table=cr_efficiency&do=AjaxTop -->
+			<p><strong>Najvýkonnejšie Cz/Sk klany</strong></p>
+		</a>
+		<div class="table-responsive">
+			<table class=" table table-striped table-condensed responsive">
+				{foreach $clanseff as $data}
+				<tr>
+					<td><img src="{$data->emblems_small}"></td>
+					<td>{$data->abbreviation}</td>
+					<td>{$data->value}</td>
+					<td>{$data->rank}</td>
+					<td>{$data->rank_delta}</td>
+				</tr>
+				{/foreach}
+			</table>
+		</div>
+		</div>
+	</div>
+
+  <div class="col-sm-4">
+    <div class="well">
+    <a n:href="RebricekKlany:wn8random"> 
+      <p><strong>Rebríček Cz/Sk klany podľa WN8</strong></p>
+    </a>
+    <div class="table-responsive">
+      <table id="wn8clans" class=" table table-striped table-condensed responsive">
+        {foreach $clanWn8 as $data}
+        <tr>
+          <td>{$data->rank}</td>
+          <td><img src="{$data->emblem}" height="24px"></td>
+          <td>{$data->name}</td>
+          <td id="wn8">{$data->wn8}</td>
+          <td id="winrate">{$data->winrate}</td>
+        </tr>
+        {/foreach}
+      </table>
+    </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+/*
+var cellData = $('#wn8clans #wn8').text();    
+ 
+switch(true) {
+  case ( cellData < 300) :
+				$(wn8).css('background-color', '#000000');
+				break;
+  case  (cellData >= 300 && cellData <= 599 ) :
+				$(wn8).css('background-color', '#cd3333');
+				break;
+  case  (cellData >= 600 && cellData <= 899 ) :
+				$(wn8).css('background-color', '#d77900');
+				break;
+  case  (cellData >= 900 && cellData <= 1249 ) :
+				$(wn8).css('background-color', '#d7b600');
+				break;
+  case  (cellData >= 1250 && cellData <= 1599 ) :
+				$(wn8).css('background-color', '#6d9521');
+				break;
+  case  (cellData >= 1600 && cellData <= 1899 ) :
+				$(wn8).css('background-color', '#4c762e');
+				break;
+  case  (cellData >= 1900 && cellData <= 2349 ) :
+				$(wn8).css('background-color', '#4a92b7');
+				break;
+  case  (cellData >= 2350 && cellData <= 2899 ) :
+				$('#wn8').css('background-color', '#83579d');
+				break;
+  case  (cellData >= 2900  ) :
+				$(wn8).css('background-color', '#5a3175');
+				break;
+}
+*/
+</script>
+
+
+
+</div>
+
+<div class="row bg-success">
+  <div class="col-sm-5 " style="padding-top:25px">
+      <div class="well">
+        <p><strong>Kto mal zbytočných 2500 goldov alebo kto si zmenil nick?</strong></p>
+        <div class="table-responsive">
+          <table class=" table table-striped table-condensed responsive">
+            {foreach $chnick as $data}
+            <tr>
+              <td>{$data->timestamp|date:'%d.%m.%Y'}</td>
+              <td>{$data->nick}</td>
+              <td> ==> </td>
+              <td>{$data->nickname}</td>
+            </tr>
+            {/foreach}
+          </table>
+        </div>
+
+      </div>
+    </div>
+  <div class="col-sm-5" style="padding-top:25px">
+  		<div class="well">
+    		<a n:href="Nabor:">	<p><strong>Nábor </strong></p> </a>
+
+    		Časť venovaná náboru. Bude <strong>dočasne</strong> dostupná pre všetkých.
+    		Kedže je tam veľa voľných hráčov treba najskôr nastaviť filter tak aby
+    		vracal z databázy menej ako 500 výsledkov. Filtruje sa podľa WN8. <br />
+
+    		Keďže nič nie je dokonalé, tak aj tu sa občas nájde hráč ktorý už je v klane aj keď
+    		sa nachádza v zozname. Treba si treba hráčov overiť ešte z iných zdrojov.<br /><br />
+
+    		<strong>Použité skratky</strong><br />
+    		All,Skir,Strong - bitky všetky, skirmish,stronghold <br />
+    		VI,VIII,X - tanky tier 6,8,10 <br />
+    		7,14,30 - celkom bitiek za 7,14,30 dní <br />
+  		</div>
+  </div>
+
+</div>
+
+{/block}

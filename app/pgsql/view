@@ -1,0 +1,7 @@
+refresh materialized view aktualne_odchody;
+refresh materialized view rebricek_gr_players;
+refresh materialized view rebricek_wn8_players;
+refresh materialized view cz_players;
+refresh materialized view clans_cs;
+refresh materialized view players_wn8_cs;
+refresh materialized view players_gr_cs;

@@ -1,0 +1,39 @@
+{* Latte template *}
+{block head}<link href="{$basePath}/css/control.css" rel="stylesheet" type="text/css" >{/block}
+{block content}
+
+
+
+<div class="control_history">
+    
+    História hráčových klanov a funkcii v nich.
+    <table class="statistika">
+            <tr>
+                
+                <th class="control">Klan ID</th>
+                <th class="control">Klan </th>
+                <th class="control">Rola</th>
+                <th class="control">Odkedy</th>
+                <th class="control">Dokedy</th>
+                
+                
+            </tr>
+            
+            {foreach $history_role as $v}
+            <tr>
+                
+                    <td class="control_stat"><img src="{$v->emblems_medium}" ></td>
+                    <td class="control_stat">{$v->abbre} </td>
+                    <td class="control_stat">{$v->role}</td>
+                    <td class="control_stat">{$v->odkedy|date:'%d.%m.%Y'} </td>
+                    <td class="control_stat">{$v->dokedy|date:'%d.%m.%Y'}</td>
+                    
+            </tr>
+            {/foreach}
+            
+</table>
+
+                    
+
+</div>                  
+{/block}

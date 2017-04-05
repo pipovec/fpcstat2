@@ -1,0 +1,78 @@
+{* Latte template *}
+
+
+ {dump $wn8daily}
+ 
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ 
+
+<script type="text/javascript"> 
+    
+google.load('visualization', '1', {
+    packages: ['corechart', 'bar']});
+
+google.setOnLoadCallback(drawColColors);
+
+function drawColColors() {
+     var data = google.visualization.arrayToDataTable([<?php echo join($wn8daily, ', ') ?>,]);
+
+      var options = {
+        title: 'Denne hodnoty WN8 za posledny mesiac',
+        height: 300,
+        widht: 1500,
+        
+        legend: {
+            position: 'none'
+        },
+            
+        hAxis: {
+          showTextEvery: 5
+         
+        },
+        animation:{
+            duration: 3000,
+            easing: 'linear',
+            startup: 'true'
+
+        },
+                
+        vAxis: {
+          title: 'Hodnoty WN8'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('wn8daily'));
+      chart.draw(data, options);
+    }
+ 
+</script> 
+
+ <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([<?php echo join($wn8mesiac, ', ') ?>,]);
+
+        var options = {
+          title: 'Vyvoj celkovej hodnoty WN8 za mesiac',
+          curveType: 'none',
+          legend: { position: 'none' },
+          hAxis: {  showTextEvery: 5, logScale: true},
+          series: { 0: { lineWidth: 3 }},
+          pointSize: 5,
+          pointShape: 'diamond',
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+ 
+ <div id="wn8daily" style="width: 1000px; height: 300px"></div>
+ 
+ <div id="curve_chart" style="width: 1000px; height: 300px"></div>
+
+ 
+ 

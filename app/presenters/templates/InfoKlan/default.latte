@@ -1,0 +1,59 @@
+{block head}
+<title>FPCSTAT | Info o klane World of Tanks </title>
+<style>
+body{
+        background: url(../images/bg-body.jpg) repeat 0 0 black;
+        background-color: black;
+        background-image: url("../images/bg-body.jpg");
+        background-repeat: repeat;
+        background-attachment: scroll;
+        background-clip: border-box;
+        background-origin: padding-box;
+        background-position-x: 0px;
+        background-position-y: 0px;
+        background-size: auto auto;
+}
+</style>
+{/block}
+
+
+{block content}
+
+
+<div class="container" style="margin-top: 50px; color:antiquewhite">
+  <div class="row">
+    <div class="col-sm-4 text-center">
+      <img src="{$data['emblems']['x195']['portal']}" alt="emblem klanu {$data['tag']}" style="width:115px;height:115px;" />
+    </div>
+    <div class="col-sm-4 text-center">
+        <h1><strong>{$data['tag']}</strong></h1>
+        <h3>{$data['name']}</h3>
+       
+    </div>
+    <div class="col-sm-4 text-center">
+       <img src="{$data['emblems']['x195']['portal']}" alt="emblem klanu {$data['tag']}" style="width:115px;height:115px;" />
+    </div>
+  </div>
+
+<div class="row">
+  <hr />
+</div>
+
+<div class="row">
+    <div class="col-sm-4 text-center">
+        Veliteľ klanu: <strong>{$data['leader_name']}</strong>
+    </div>
+
+    <div class="col-sm-4 text-center">
+        Klan založil: <strong>{$data['creator_name']}</strong>
+    </div>
+
+    <div class="col-sm-4 text-center">
+        Motto: <strong>{$data['motto']}</strong>
+    </div>
+    {dump $data}
+</div>
+</div>
+
+
+{/block}

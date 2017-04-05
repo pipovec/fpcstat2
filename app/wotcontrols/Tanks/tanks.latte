@@ -1,0 +1,23 @@
+{* Latte template *}
+
+{block content}
+
+
+    <table>
+    <tr>
+        <th>Ťažké tanky</th>
+        <th>Počet tankov</th>
+    </tr>
+    
+    {var $i=0}
+        {foreach $blbost as $pocet}
+            <tr><td>{$pocet->name}</td><td>{$pocet->pocet}{var $i = $i + $pocet->pocet}</td></tr>
+            {/foreach}
+    <tr>
+        <th>Spolu ťažkých tankov:</th>
+        <th>{$i}</th>
+    </tr>
+    </table>
+
+
+{/block}

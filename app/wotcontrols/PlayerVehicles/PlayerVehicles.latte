@@ -1,0 +1,49 @@
+{block head}<link href="{$basePath}/css/control.css" rel="stylesheet" type="text/css" >{/block}
+
+
+{block content}
+
+<div class="control_vehicles">
+
+    <table class="control">
+                <tr>
+                <th class="control">Tank</th>
+                <th class="control">Tier</th>
+                <th class="control">Mark of mastery</th>
+                <th class="control">Maximalne fragov</th>
+                <th class="control">Bitiek</th>
+                <th class="control">Winrate</th>
+                <th class="control">Frags</th>
+                <th class="control">DMG</th>
+                <th class="control">Spot</th>
+                <th class="control">Decap</th>
+                <th class="control">WN8</th>
+                </tr>
+                
+            {foreach $data as $v}
+
+               <tr>
+               <td class="control_stat">{$v['name']}</td>
+               <td class="control_stat">{$v['level']}</td>
+               <td class="control_stat">{$v['mark_of_mastery']}</td>
+               <td class="control_stat">{$v['max_frags']}</td>
+               <td class="control_stat">{$v['battles']}</td>
+               <td style="background-color:{!$v['colorw']}; color: white">{$v['wins']|number:3} %</td>
+               <td class="control_stat">{$v['frags']/$v['battles']|number:2}</td>
+               <td class="control_stat">{$v['damage_dealt']/$v['battles']|number:2}</td>
+               <td class="control_stat">{$v['spotted']/$v['battles']|number:2}</td>
+               <td class="control_stat">{$v['dropped_capture_points']/$v['battles']|number:2}</td>
+               <td style="background-color:{!$v['color']}; color: white">{$v['wn8']|number:2}</td>
+               </tr>
+
+           {/foreach}
+    </table>
+    <p style="font-size: 0.6em;">
+        Pre výpočty používam nové očakávané hodnoty Expected Values v26. Expected Tank Values v26 (22.02.2016) zo serveru <link href="http://www.vbaddict.net">vBAddict.net</link> Čas výpočtu WN8 tankov: {$cas|number:4}   </p>
+</div>
+
+
+
+           
+           
+{/block}

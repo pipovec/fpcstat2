@@ -1,0 +1,119 @@
+{block head}
+<title>Rebríčky Ceskych a Slovenských klanov hry WOT</title>
+<script src="{$basePath}/js/nette.ajax.js"></script> 
+{/block}
+
+
+{block content}
+<div class="col-sm-12">
+	<h4 class="page-header"> Rebríčky Českých a Slovenských klanov </h4>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+	<!-- Menu -->
+	<nav class="navbar">
+		<div class="container-fluid">
+			
+
+			<div class="col-sm-4 col-sm-offset-3">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+	        		<a class="dropdown-toggle" data-toggle="dropdown"href="#">Globalna mapa<span class="caret"></span></a>
+
+	        		<ul class="dropdown-menu">
+	        		<li><a n:href="AjaxTop!, table=>cr_gm_elo_rating" class="ajax"> Celkové hodnotenie </a></li>
+	        		<li><a n:href="AjaxTop!, table=>cr_gm_elo_rating_10" class="ajax"> Absolute division (X) </a></li>
+	          		<li><a n:href="AjaxTop!, table=>cr_gm_elo_rating_8"> Champion division (VIII) </a></li>
+	         		<li><a n:href="AjaxTop!, table=>cr_gm_elo_rating_6"> Medium division (IV) </a></li> 
+	         		</ul>
+	         	</li>
+
+	         	<li class="dropdown">
+	        		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Stronghold<span class="caret"></span></a>
+
+	        		<ul class="dropdown-menu">
+	        		<li><a n:href="AjaxTop!, table=>cr_fb_elo_rating" class="ajax"> Celkové hodnotenie </a></li>
+	        		<li><a n:href="AjaxTop!, table=>cr_fb_elo_rating_10" class="ajax"> Absolute division (X) </a></li>
+	          		<li><a n:href="AjaxTop!, table=>cr_fb_elo_rating_8" class="ajax"> Champion division (VIII) </a></li>
+	         		</ul>
+	         	</li>
+
+	         	<li class="dropdown">
+	        		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Priemery Ø<span class="caret"></span></a>
+
+	        		<ul class="dropdown-menu">
+		         	<li><a n:href="AjaxTop!, table=>cr_global_rating_avg" class="ajax"> Ø global rating </a></li>
+		         	<li><a n:href="AjaxTop!, table=>cr_global_rating_weighted_avg" class="ajax"> Ø vážený global rating </a></li>
+		         	<li><a n:href="AjaxTop!, table=>cr_battles_count_avg_daily" class="ajax"> Ø počet bitiek za deň </a></li>
+		         	<li><a n:href="AjaxTop!, table=>cr_battles_count_avg" class="ajax"> Ø počet bitiek </a></li>
+		         	<li><a n:href="AjaxTop!, table=>cr_wins_ratio_avg" class="ajax"> Ø pomer vítazstiev/prehier </a></li>	
+		         	<li><a n:href="AjaxTop!, table=>cr_v10l_avg" class="ajax"> Ø počet tankov tieru X na člena klanu</a></li>
+		         	</ul>
+		        </li>
+	         	
+	        	<li><a n:href="AjaxTop!, table=>cr_efficiency" class="ajax"> Indikátor výkonnosti klanu </a></li>
+
+	        </ul>
+		</div>
+	</nav>
+</div>
+</div>
+
+
+	
+	
+	<!-- Priestor na tabulky -->
+	<div class="row">
+		<div class="col-sm-10">
+		{snippet topclans}
+		<table class="table table-striped table-bordered table-responsive">
+			
+			<thead>
+				<tr>
+					<th class="col-sm-1 text-center">Umiestnenie</th>	
+					<th class="col-sm-1 text-center">Tag</th>
+					<th class="col-sm-2 text-center">Klan</th>
+					<th class="col-sm-1 text-center">Hodnota</th>
+					<th class="col-sm-1 text-center">Umiestnenie v EU</th>
+					<th class="col-sm-1 text-center">Delta</th>
+				</tr>	
+			</thead>
+			
+			
+			<tbody>
+			{foreach $topgr as $list}
+               <tr>
+                   <td class="text-center">{$iterator->counter}.</td> 
+                   <td class="text-center">{$list->abbreviation}</td>
+                   <td >{$list->name}</td>
+                   <td class="text-center">{$list->value}</td>
+                   <td class="text-center">{$list->rank}</td>
+                   <td class="text-center" id="delta">{$list->rank_delta}</td>
+               </tr>
+            {/foreach}
+            </tbody>
+			
+		</table>
+		</div>
+		{/snippet}
+
+		<div class="col-sm-2">
+		
+		</div>
+
+	</div>
+
+
+
+<!-- Inicializacia Ajax -->
+		<script>
+
+		$(
+			function ()
+		 	{
+		    	$.nette.init();
+			}
+		);
+		</script>
+
+{/block}
