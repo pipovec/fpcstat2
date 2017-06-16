@@ -128,8 +128,18 @@ class Repository extends Nette\Object
       return $pole;
     }
 
+    function wn8player_history($nickname)
+    {
+      return $this->pgsql->query("SELECT w.date, w.wn8 FROM players_all pa LEFT JOIN wn8player_history w ON w.account_id = pa.account_id WHERE nickname='".$nickname."' ORDER BY date DESC");
+    }
+
     function ChangeNick()
     {
       return $this->pgsql->query("SELECT timestamp, nick, nickname FROM changed_players_nick ORDER BY timestamp DESC LIMIT 10");
+    }
+
+    function FindPlayer($nick)
+    {
+      return $this->pgsql->query("SELECT * FROM players_all WHERE nickname = '".$nick."'");
     }
 }

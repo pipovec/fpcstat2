@@ -1,32 +1,32 @@
 {block head}
 <title>FPCSTAT | Informácie o hráčoch hry World of tanks</title>>
-<!--script src="{$basePath}/js/nette.ajax.js"></script> 
-<script src="{$basePath}/js/netteForms.js"></script-->
-<script src="https://npmcdn.com/react@15.4.2/dist/react.min.js"></script>
-<script src="https://npmcdn.com/react-dom@15.4.2/dist/react-dom.min.js"></script>
-<script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+
+<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<link href="{$basePath}/static/css/main.6f738b2f.css" rel="stylesheet">
+
 {/block}
 
 
 {block content}
-<div class="row">
 
+<div class="row justify-content-center">
+    <div class="col-sm-offset-1  col-sm-4" id="root">
+        <script type="text/javascript" src="{$basePath}/static/js/main.61ec3616.js"></script>
+    </div>
 </div>
 
-<div class="row">
-<!-- Oddelovacia ciara -->
-<hr />
+<!-- Hladanie v databaze -->
+
+<div class="row justify-content-center">
+    <div class="col-sm-offset-1 col-sm-4" id="wn8player">
+        <script type="text/babel" src="{$basePath}/js/react/w8player.js"></script>
+    </div>
 </div>
 
-<div class="row"  id="hrac">
 
-<script type="text/babel" src="{$basePath}/js/react/hladaj_nick.js"></script>  
-</div>
-
-
-
-
-  
 
 
 
