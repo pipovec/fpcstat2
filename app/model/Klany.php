@@ -19,16 +19,11 @@ class Klany extends Nette\Object
     {
         return $this->pgsql->table('clan_all');
     }
-
-    private function ClanCz()
-    {
-        return $this->pgsql->table('tmp_clans_cs');
-    }
-
+   
     public function KlanyCz()
     {
         
-        return $this->ClanAll()->where('clan_id', $this->ClanCz())->where('members_count > ',0);
+        return $this->ClanAll()->where('language', 'cs');
         
 
     }

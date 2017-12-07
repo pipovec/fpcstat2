@@ -2,8 +2,10 @@
 <title>FPCSTAT | Chat</title>
 <script src="{$basePath}/js/netteForms.js"></script>
 <script src="{$basePath}/js/nette.ajax.js"></script> {* Nette Ajax depens on jQuery *}
-<link rel="stylesheet" href="{$basePath}/js/DataTables/datatables.min.css">
-<script src="{$basePath}/js/DataTables/datatables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
 {/block}
 
 {block content}
@@ -16,12 +18,7 @@ $(function () {
 });
 </script>
 
-<div class="row">
-
-</div>
-
-
-<div class="row">
+<div class="row" style="margin-top:30px;">
 <!-- Oddelovacia ciara -->
 <hr />
 </div>
@@ -69,8 +66,8 @@ $(function () {
 	</div>
 
 	<div class="col-sm-2">
+	{include '../reklama.1.latte'}
 	{include '../reklama.latte'}
-
 
 	</div>
 </div>
@@ -78,6 +75,7 @@ $(function () {
 <script>
 $('#chat').dataTable( {
 	"order": [[ 0, "desc" ]],
+	"lengthMenu": [[15,25, 50, -1], [15,25, 50, "All"]],
     "sAjaxSource": {link chatJson!},
     "aoColumns": [
         {"mData": "time"},
@@ -86,5 +84,6 @@ $('#chat').dataTable( {
     ]
 });
 </script>
+
 
 {/block}

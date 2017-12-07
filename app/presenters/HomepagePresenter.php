@@ -75,6 +75,24 @@ class HomepagePresenter extends BasePresenter
 
     }
 
+    function StrongholdTanks($level)
+    {
+        return $this->Rebricek->StrongholdTanks($level);
+    }
+
+    function Stronghold6()
+    {
+        return $this->StrongholdTanks(6);
+    }
+
+    function Stronghold8()
+    {
+        return $this->StrongholdTanks(8);
+    }
+
+
+
+
     public function renderDefault()
     {
     	$this->template->odchody    = $this->Odchody();
@@ -91,5 +109,8 @@ class HomepagePresenter extends BasePresenter
         $this->template->chnick     = $this->ChangedNicks();
 
         $this->template->clanWn8    = $this->Wn8clan();
+
+        $this->template->s6         = $this->Stronghold6();
+        $this->template->s8         = $this->Stronghold8();
     }
 }
