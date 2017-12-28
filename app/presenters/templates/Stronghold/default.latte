@@ -1,0 +1,119 @@
+{block head}
+<title>Prehlad ake tanky jazdia v strongholde</title>
+{/block}
+
+
+{block content}
+
+<div class="row" style="padding-bottom:10" style="margin-top:30px;">
+<hr />
+</div>
+<div class="row">
+
+	<div class="col-sm-4">
+		<div class="well">
+		    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <div id="str6bat"></div>
+		
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="well">
+      <div id="str6dmg"></div>
+		</div>
+	</div>
+
+<div class="col-sm-4">
+		<div class="well">
+		
+		</div>
+	</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-sm-4">
+		<div class="well">
+		  
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="well">
+      
+		</div>
+	</div>
+
+<div class="col-sm-4">
+		<div class="well">
+		
+		</div>
+	</div>
+
+</div>
+</div>
+
+<script  type="text/javascript">
+  google.charts.load('current', { packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBasic);
+
+  function drawBasic() {
+        var result = ' {php echo $data6bat; } ';
+      
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Tank');
+        data.addColumn('number', 'Batlles');
+
+        data.addRows(JSON.parse(result)) ;
+
+      
+        var options = {
+          height: 350,
+          title: 'Počet bitiek s tankom v Stronghold 6 za včerajšok',
+          
+          vAxis: {
+            title: 'Počet bitiek za deň'
+          }
+        };
+
+        var chart = new google.visualization.ColumnChart(
+          document.getElementById('str6bat'));
+
+        chart.draw(data, options);
+      }
+</script>
+
+
+
+<script  type="text/javascript">
+  google.charts.load('current', { packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBasic);
+
+  function drawBasic() {
+        var result = ' {php echo $data6dmg; } ';
+      
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Tank');
+        data.addColumn('number', 'AVG Damage');
+
+        data.addRows(JSON.parse(result)) ;
+
+      
+        var options = {
+          height: 350,
+          title: 'Priemerny damage s tankom v Stronghold 6 za včerajšok',
+          
+          vAxis: {
+            title: 'Priemerny damage za deň'
+          }
+        };
+
+        var chart = new google.visualization.ColumnChart(
+          document.getElementById('str6dmg'));
+
+        chart.draw(data, options);
+      }
+</script>
+{/block}

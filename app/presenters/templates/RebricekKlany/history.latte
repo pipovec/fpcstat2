@@ -1,0 +1,347 @@
+{block head}
+<title>Grafy</title>
+<script src="{$basePath}/js/nette.ajax.js"></script> 
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<!--script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script-->
+<!--script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script-->
+
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+{/block}
+
+{block content}
+
+<div class="page-header" style="margin-top:70px;">      
+    
+    <div class=row>  
+        <div class="col-sm-4">                
+                <form n:name=form class="form-inline">
+                    <input type="text" class="form-control" n:name=klan placeholder="Skratka klanu">
+                    <button type="submit" n:name=send class="btn btn-primary">Odosli</button>
+                </form>
+        </div>
+        <div class="col-sm-8">
+        {snippet isklan} 
+          <div id="hlaska"> {$isklan} </div>
+        {/snippet}
+       </div>
+    </div>
+       
+</div>
+
+{snippet grafy}
+{ifset  $cr_efficiency_history}
+<div class="row">
+    <div class="col-md-2">
+        <div id="clanData"></div>
+        <div id="clanProvince" style="font-size: 10px"></div>
+    </div>
+
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                    <div id="cr_efficiency_history"></div>
+                    <script>
+                    $(function () { 
+                        var myChart = Highcharts.chart('cr_efficiency_history', {
+                            chart: {
+                                type: 'line'
+                            },
+                            title: {
+                                text: 'Efficiency history value'
+                            },
+                            xAxis: {   
+                                labels: {
+                                enabled: false
+                            }                     
+                            
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Value'
+                                }
+                            },
+                            series:[{
+                            name: 'value',
+                            data: {php echo $cr_efficiency_history}, 
+                            
+                            }]
+                        });
+                    });
+                    </script>        
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="well">
+                    <div id="cr_fb_elo_rating_history"></div>
+                    <script>
+                    $(function () { 
+                        var myChart = Highcharts.chart('cr_fb_elo_rating_history', {
+                            chart: {
+                                type: 'line'
+                            },
+                            title: {
+                                text: 'Stronghold celkovy'
+                            },
+                            xAxis: {                        
+                            labels: {
+                                enabled: false
+                            }
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Value'
+                                }
+                            },
+                            series:[{
+                            name: 'value',
+                            data: {php echo $cr_fb_elo_rating_history}, 
+                            
+                            }]
+                        });
+                    });
+                    </script>        
+                    </div>           
+                </div>
+            </div>
+        
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                <div id="cr_global_rating_avg_history"></div>
+                    <script>
+                    $(function () { 
+                        var myChart = Highcharts.chart('cr_global_rating_avg_history', {
+                            chart: {
+                                type: 'line'
+                            },
+                            title: {
+                                text: 'Priemerny global rating'
+                            },
+                            xAxis: {                        
+                            labels: {
+                                enabled: false
+                            }
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Value'
+                                }
+                            },
+                            series:[{
+                            name: 'value',
+                            data: {php echo $cr_global_rating_avg_history}, 
+                            
+                            }]
+                        });
+                    });
+                    </script>        
+                </div>
+                
+            </div>
+            
+
+            <div class="col-md-6">
+                <div class="well">
+                <div id="cr_global_rating_weighted_avg_history"></div>
+                    <script>
+                    $(function () { 
+                        var myChart = Highcharts.chart('cr_global_rating_weighted_avg_history', {
+                            chart: {
+                                type: 'line'
+                            },
+                            title: {
+                                text: 'Vazeny priemer global rating'
+                            },
+                            xAxis: {                        
+                            labels: {
+                                enabled: false
+                            }
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Value'
+                                }
+                            },
+                            series:[{
+                            name: 'value',
+                            data: {php echo $cr_global_rating_weighted_avg_history}, 
+                            
+                            }]
+                        });
+                    });
+                    </script>
+                
+                </div>
+                </div>
+            </div>
+</div>
+{/ifset}
+{/snippet}
+
+<script>
+/** Vymazanie hlasky po 3 sekundach */
+setTimeout(function(){
+  if ($('#hlaska').length > 0) {
+    $('#hlaska').remove();
+  }
+}, 3000)
+</script>
+
+<!-- Inicializacia Ajax -->
+<script>
+    $(function (){
+	    $.nette.init();
+	}
+    );
+</script>
+
+
+ <!-- Clan data React-->
+    <script type="text/babel">
+        class App extends React.Component {
+            constructor(props) {
+            super(props);
+            this.getClanData = this.getClanData.bind(this);
+            this.state = { clan: ''};
+            
+            this.getClanData();
+        }
+
+        getClanData() {
+            
+            var url = "https://api.worldoftanks.eu/wgn/clans/info/?application_id=883ff6ceefb13177357ffea34d6fb06f&clan_id="+ this.props.clan_id+"&game=wot&language=cs&fields=tag%2Cname%2Cemblems.x195%2Cmembers_count";    
+            var xhr = new XMLHttpRequest();
+            
+            xhr.onload = function() {
+            var jsondata = xhr.responseText;
+            this.setState({ clan: JSON.parse(jsondata)});
+            
+            }.bind(this);
+
+            xhr.open('GET', url , true);
+            xhr.send();
+            
+        }
+
+        render() {
+            
+            for(const props in this.state.clan) { 
+            var picture = this.state.clan.data[this.props.clan_id].emblems['x195'].portal;
+            var tag     = this.state.clan.data[this.props.clan_id].tag;
+            var name    = this.state.clan.data[this.props.clan_id]['name'];
+            var count   = this.state.clan.data[this.props.clan_id]['members_count'];
+            }
+            return (
+            <div>
+            <div className="row">
+                <img className="img-responsive center-block" src={ picture}  style={{ width:125}}/>
+            </div>
+
+            <div className="row">
+                <h1 className="text-center">{ tag}</h1>        
+            </div>
+
+            <div className="row">
+                <h4 className="text-center">{ name}</h4>
+            </div>
+
+            <div className="text-center">
+            Počet hráčov: { count}
+        
+            </div>
+            </div>
+            );
+            }
+        }
+    
+
+    ReactDOM.render(
+    <App clan_id={ {php  echo $clan_id;}}/>,
+    document.getElementById('clanData')
+    );
+    </script>
+
+
+<script type="text/babel">
+class Provinces extends React.Component {
+    constructor(props) {
+        super(props);
+        this.getProvinceData = this.getProvinceData.bind(this);
+        this.state = { province: ''};
+        
+        this.getProvinceData();
+    }
+  
+    getProvinceData() {
+        var url = "https://api.worldoftanks.eu/wot/globalmap/clanprovinces/?application_id=883ff6ceefb13177357ffea34d6fb06f&fields=front_name%2Carena_name%2Cturns_owned%2Cdaily_revenue%2Cprovince_name%2Cmax_vehicle_level&clan_id="+ this.props.clan_id;    
+        var xhr = new XMLHttpRequest();
+        
+        xhr.onload = function() {
+        var jsondata = xhr.responseText;
+        this.setState({ province: JSON.parse(jsondata)});
+        
+        }.bind(this);
+        xhr.open('GET', url , true);
+        xhr.send();
+  
+  
+    }
+    
+    render() {   
+        
+        var data = this.state.province.data;
+        var content = "";
+        if(typeof(data) === 'object') {        
+          var c  = data[this.props.clan_id];       
+          
+          content = c.map((c) =>
+          <tr key={ c.province_name}>             
+             <td> { c.province_name} </td>
+             <td> { c.arena_name} </td>
+             <td className="text-center">{ c.max_vehicle_level} </td>
+             <td className="text-center">{ c.turns_owned} </td>
+             <td className="text-center">{ c.daily_revenue} </td>
+          </tr>
+          
+          );
+          
+        }
+       
+        return (
+            
+            <div>
+                <hr /><h5><strong> Provincie klanu: </strong></h5>
+               <table className="table table-striped table-condensed">              
+                  <thead>
+                      <tr>                          
+                          <th>Uzemie</th>
+                          <th>Mapa</th>
+                          <th>Level</th>
+                          <th>Pocet kol</th>
+                          <th>Denny prijem</th>
+                      </tr>
+                  </thead>
+                  <tbody>        
+                  { content}
+                  </tbody>
+                </table>
+                <hr />
+            </div>
+        );
+    }
+  }
+
+ReactDOM.render(<Provinces clan_id = { {php  echo $clan_id;} }/>, 
+document.getElementById('clanProvince'));
+</script>
+
+
+{/block}
+
