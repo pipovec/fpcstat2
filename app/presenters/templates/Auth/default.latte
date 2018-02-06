@@ -1,0 +1,44 @@
+{block head}
+<title>Prihlasenie</title>
+<meta name="Keywords" content="WOT,CZ/SK,WN8,štatistika,najlepší hráči,najlepšie klany">
+<meta name="Description" content="Prihlasenie na stranku fpcstat.cz">
+{/block}
+
+{block content}
+{dump $dump}
+<div class="cotainer" style="margin-top: 80px;">
+	<div class="row">
+
+		<div class="col-sm-2 col-sm-offset-5">
+			<div class="well">
+			<h3>Zvolte moznost prihlasenia</h3>
+			<div class="row" style="margin-top: 20px;">
+				<a id="api">Wargaming Api</a>
+			</div>
+
+			<div class="row" style="margin-top: 20px;">
+				<a n:href="Auth:classic">Login a heslo</a>
+			</div>
+
+			<div>
+		
+		</div>
+	
+	</div>
+
+<div>
+
+<script n:syntax="off">
+
+
+
+$('#api').click( function(e) { 	     
+			 
+      var uri = "https://api.worldoftanks.eu/wot/auth/login/?status=ok&access_token=2f5045e99bf02c8e83de4be617b7232880f4220e&nickname=pipovec&account_id=504279883&expires_at=12096000&application_id=883ff6ceefb13177357ffea34d6fb06f";
+			var url="https://api.worldoftanks.eu/wot/auth/login/?application_id=883ff6ceefb13177357ffea34d6fb06f&redirect_uri=https%3A%2F%2Fdevelopers.wargaming.net%2Freference%2Fall%2Fwot%2Fauth%2Flogin%2F&nofollow=1";
+
+			$(location).attr('href', url);
+
+   });
+</script>
+{/block}

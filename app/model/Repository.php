@@ -142,4 +142,9 @@ class Repository extends Nette\Object
     {
       return $this->pgsql->query("SELECT * FROM players_all WHERE nickname = '".$nick."'");
     }
+
+    function PlayersPass()
+    {
+      return $this->pgsql->table('players_pass');
+    }
 }

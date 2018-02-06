@@ -1,0 +1,118 @@
+{block head}
+<title>Prihlasenie - klasicke</title>
+<meta name="Keywords" content="WOT,CZ/SK,WN8,štatistika,najlepší hráči,najlepšie klany">
+<meta name="Description" content="Prihlasenie na stranku fpcstat.cz">
+{/block}
+
+{block content}
+<div class="cotainer" style="margin-top: 80px;">
+	<div class="row">
+
+		<div class="col-sm-3 col-sm-offset-4">
+			<div class="well">
+			{dump $dump}
+			<a n:href="CheckPass!">Ukazka linku</a>	
+
+			<h3>Klasicke prihlasenie</h3>
+				<form id="login">
+				<div class="form-group">					
+					<input type="text" class="form-control" id="nick" aria-describedby="emailHelp" placeholder="nick" autocomplete="on">
+					<small id="nickHelp" class="form-text text-muted">Pouzivajte nick ako mate v hre, inac sa neprihlasite</small>
+				</div>
+				<div class="form-group">					
+					<input type="password" class="form-control" id="passw" name="password" placeholder="Password" readonly>
+					<input type="hidden" id="account_id"  name="account_id" value=""/>
+				</div>				
+				<div class="text-center">
+					<input type="submit" value="Submit" id="button" class="btn btn-primary" disabled/>
+				</div>
+				</form>
+
+			<div>
+		
+		</div>
+	
+	</div>
+
+<div>
+
+<script n:syntax="off">
+
+$(document).ready( function () {
+	
+	// Validate nick in WG
+	$('#nick').blur( function() { 
+
+	var url = "https://api.worldoftanks.eu/wot/account/list/";
+	var id = "883ff6ceefb13177357ffea34d6fb06f";
+	var json;
+
+	$.ajax({
+			method: "POST",
+			url: url,
+			dataType: "json",
+			data: { application_id: id, limit: 1,  search: this.value },
+			success: function(data) {
+			json = data;
+
+			if(json['status'] == "ok") {				
+
+				if(json.meta.count != 1) {
+					$('#nickHelp').css("color", "red");
+					$('#nickHelp').text("Tento nick nie je v databaze WG") ;
+					
+				}
+				else {					
+					$('#nickHelp').css("color", "green");
+					$('#nickHelp').text("Tvoje ID je " + json.data[0].account_id);
+					$('#account_id').val(json.data[0].account_id);
+					$('#passw').attr("readonly", false);
+					$('#button').attr("disabled", false);
+				}
+				
+
+			}
+			else {
+				$('#nickHelp').css("color", "red");
+				$('#nickHelp').text("Skontroluj si nick, ") ;
+			}
+
+			}	
+	});
+
+	
+	
+	
+
+	});
+});
+</script>
+
+
+<script>
+
+$( "#login" ).submit(function( event ) {  
+	event.preventDefault();
+	
+	$.ajax({		
+		method: "POST",
+		url: "/auth/classic?do=CheckPass" , 
+		dataType: "json",
+		data: { account_id: $("#account_id").val(),nick: $("#nick").val(),password: $("#passw").val() },			
+		success: function (data) {
+			switch(data.reason) {
+				case ok:
+				break;
+				case password_false:
+				break;
+				case no_account:
+				break;
+
+			};
+		}	
+	});
+	
+});
+
+</script>
+{/block}
