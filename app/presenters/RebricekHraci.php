@@ -7,7 +7,13 @@ use Nette,
 
 class RebricekHraciPresenter extends BasePresenter
 {
-	/** @var \App\Model\Repository @inject */
+    
+    function __construct()
+    {
+       
+    }
+    
+    /** @var \App\Model\Repository @inject */
     public $Repository;
 
     function RebricekWn8()

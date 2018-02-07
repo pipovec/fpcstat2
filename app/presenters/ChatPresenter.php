@@ -10,6 +10,11 @@ use Nette,
 class ChatPresenter extends BasePresenter
 {
 
+  function __construct()
+  {
+        
+  }
+
   /** @var \App\Model\Chat @inject */
   public $chat;
 
@@ -47,6 +52,7 @@ public function handleChatJson()
 
   public function renderDefault()
   {
+    $this->SaveRequest();
     $this->template->pokus = $this->Pokus();
   }
 

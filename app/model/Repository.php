@@ -147,4 +147,9 @@ class Repository extends Nette\Object
     {
       return $this->pgsql->table('players_pass');
     }
+
+    function Stats() 
+    {
+      return $this->pgsql->table('stats');
+    }
 }

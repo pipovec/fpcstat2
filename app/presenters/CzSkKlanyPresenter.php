@@ -8,7 +8,13 @@ use Nette,
 
 class CzSkKlanyPresenter extends BasePresenter
 {
-	/** @var \App\Model\Klany @inject */
+    
+    function  __construct()
+    {                      
+       
+    }
+    
+    /** @var \App\Model\Klany @inject */
   	public $model;
 
     public function KlanyCz()
@@ -18,7 +24,8 @@ class CzSkKlanyPresenter extends BasePresenter
 
    
     public function renderDefault()
-    {
-       $this->template->klany = $this->KlanyCz();
+    {        
+        $this->SaveRequest();
+        $this->template->klany = $this->KlanyCz();
     }
 }

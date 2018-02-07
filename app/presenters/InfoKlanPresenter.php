@@ -13,7 +13,10 @@ use Nette,
 
 class InfoKlanPresenter extends BasePresenter
 {
-	
+    function  __construct()
+    {                      
+        
+    }
 
 	/** @var \App\Model\Dsn @inject */
   	public $dsn;
@@ -41,7 +44,8 @@ class InfoKlanPresenter extends BasePresenter
 
 	public function renderDefault($clan_id)
 	{
-		$this->template->data = $this->Data($clan_id);
+        $this->SaveRequest();
+        $this->template->data = $this->Data($clan_id);
 	}
 
 }

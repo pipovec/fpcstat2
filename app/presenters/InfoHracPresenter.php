@@ -10,6 +10,11 @@ use Nette,
 class InfoHracPresenter extends BasePresenter
 {
 
+    function  __construct()
+    {                      
+        
+    }
+
     /** @var \App\Model\Repository @inject */
     public $model;
 
@@ -60,8 +65,9 @@ class InfoHracPresenter extends BasePresenter
 
    function renderDefault()
    {
-      $this->template->data = $this->request;
-      $this->template->w8pl = $this->wn8player;
+        $this->SaveRequest();
+        $this->template->data = $this->request;
+        $this->template->w8pl = $this->wn8player;
 
    }
 

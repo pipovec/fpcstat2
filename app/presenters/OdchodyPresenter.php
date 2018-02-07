@@ -7,7 +7,13 @@ use Nette,
 
 class OdchodyPresenter extends BasePresenter
 {
-	/** @var \App\Model\Repository @inject */
+    function __construct()
+    {
+        
+    }
+    
+    
+    /** @var \App\Model\Repository @inject */
     public $Repository;
 
     function AktualneOdchody()
@@ -19,6 +25,7 @@ class OdchodyPresenter extends BasePresenter
 
     public function renderDefault()
     {
-    	$this->template->odchody = $this->AktualneOdchody();
+        $this->SaveRequest();
+        $this->template->odchody = $this->AktualneOdchody();
     }
 }

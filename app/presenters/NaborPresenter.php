@@ -18,6 +18,10 @@ class NaborPresenter extends BasePresenter
     public $celkom;
     public $table;
 
+    function __construct()
+    {
+       
+    }
     
     function nabor()
     {
@@ -74,6 +78,7 @@ class NaborPresenter extends BasePresenter
 
     public function renderDefault()
     {
+       $this->SaveRequest(); 
        $this->template->celkom  = $this->Celkom();
        $this->template->sum     = $this->celkom;
        $this->template->table   = $this->table;

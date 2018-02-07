@@ -15,33 +15,23 @@ class AuthPresenter extends BasePresenter
     private $expires_at = 1209600; // two weeks
     private $redirect = "http://127.0.0.1:8881/auth/";
     private $url = 'https://api.worldoftanks.eu/wot/auth/login/';
-    private $request;    
-
-    function  __construct(Nette\Http\Request $request) {       
-        $this->request = $request;        
-    }
+    
+    
+    
+    
     
     public function renderDefault() 
     {
+        $this->SaveRequest();
         $this->template->dump =  $this->Identity();
     }
 
-    public function renderClassic() 
-    {   
+    public function renderClassic()     {   
         
-        $section = $this->Identity();
-
-        $this->template->dump =  $section->isLogged;   
+        $this->SaveRequest();
+        $this->template->dump =  $this->getHttpRequest();   
     }
-
-    private function Identity() 
-    {
-        $session = $this->getSession();
-        $section = $session->getSection('Identity');   
-
-        return $section;
-    }
-
+   
 
     public function handleWGAuth()
     {

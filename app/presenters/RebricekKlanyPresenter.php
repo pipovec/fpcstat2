@@ -22,6 +22,11 @@ class RebricekKlanyPresenter extends BasePresenter
 	public $data;
 	public $isKlan ;
 
+	function  __construct()
+    {                      
+       
+    }
+    
 	/** @var \App\Model\Rebricek @inject */
   	public $model;
 
@@ -82,7 +87,7 @@ class RebricekKlanyPresenter extends BasePresenter
 	
 	public function renderDefault($table)
 	{
-
+		$this->SaveRequest();
 		$this->template->pokus 		= $this->Pokus();
 		$this->template->data       = $this->Top();
 		

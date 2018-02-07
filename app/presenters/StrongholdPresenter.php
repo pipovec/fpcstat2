@@ -10,6 +10,12 @@ use Nette,
 
 class StrongholdPresenter extends BasePresenter
 {
+    
+    function  __construct()
+    {                      
+        
+    }
+    
     /** @var \App\Model\Stronghold @inject */
     public $strong;
     
@@ -41,6 +47,7 @@ class StrongholdPresenter extends BasePresenter
 
     
     function renderDefault () {
+        $this->SaveRequest();
         $this->template->data6bat = $this->Str6battles();
         $this->template->data6dmg = $this->Str6damage();
     }

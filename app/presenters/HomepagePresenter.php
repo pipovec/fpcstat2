@@ -7,7 +7,13 @@ use Nette,
 
 class HomepagePresenter extends BasePresenter
 {
-	/** @var \App\Model\Repository @inject */
+    
+    function  __construct()
+    {                      
+      
+    }
+    
+    /** @var \App\Model\Repository @inject */
     public $Repository;
 
   /** @var \App\Model\Rebricek @inject */
@@ -95,7 +101,9 @@ class HomepagePresenter extends BasePresenter
 
     public function renderDefault()
     {
-    	$this->template->odchody    = $this->Odchody();
+        
+        $this->SaveRequest();
+        $this->template->odchody    = $this->Odchody();
         $this->template->wn8        = $this->Wn8();
         $this->template->gr         = $this->Gr();
 
