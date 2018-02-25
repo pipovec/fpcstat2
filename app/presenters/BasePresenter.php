@@ -24,7 +24,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $address        = $data->getRemoteAddress();
         $host           = $data->getRemoteHost();
 
-        $this->Repository->Stats()->insert(["url" => $url, "method" => $method, "address" => $address, "host" => $host]);
+        //$this->Repository->Stats()->insert(["url" => $url, "method" => $method, "address" => $address, "host" => $host]);
 
     }
     
