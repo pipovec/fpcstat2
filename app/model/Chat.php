@@ -2,7 +2,7 @@
 namespace App\Model;
 use Nette;
 
-class Chat extends Nette\Object
+class Chat extends Nette\SmartObject
 {
     /** @var Nette\Database\Connection */
     protected $pgsql;

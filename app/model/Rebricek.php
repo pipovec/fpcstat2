@@ -3,7 +3,7 @@
 namespace App\Model;
 use Nette;
 
-class Rebricek extends Nette\Object
+class Rebricek extends Nette\SmartObject
 {
 	/** @var Nette\Database\Connection */
     protected $pgsql;

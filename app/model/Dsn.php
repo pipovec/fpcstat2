@@ -4,7 +4,7 @@ namespace App\Model;
 use Nette\Utils\Json,
     Nette;
 
-class Dsn extends Nette\Object
+class Dsn extends Nette\SmartObject
 {
 	
     private $api_id     = 'application_id=c428e2923f3d626de8cbcb3938bb68f8';

@@ -5,7 +5,7 @@ use Nette;
 /**
  * Provádí operace nad databázovou tabulkou.
  */
-class Stronghold extends Nette\Object
+class Stronghold extends Nette\SmartObject
 {
     /** @var Nette\Database\Connection */
     protected $pgsql;
