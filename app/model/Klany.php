@@ -4,9 +4,11 @@ namespace App\Model;
 use Nette\Utils\Json,
     Nette;
 
-class Klany extends Nette\SmartObject
+class Klany
 {
-	/** @var Nette\Database\Connection */
+    use Nette\SmartObject;
+    
+    /** @var Nette\Database\Connection */
     protected $pgsql;
 
     public function __construct(Nette\Database\Context $db)

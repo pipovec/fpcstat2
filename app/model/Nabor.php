@@ -2,8 +2,10 @@
 namespace App\Model;
 use Nette;
 
-class Nabor extends Nette\SmartObject
+class Nabor 
 {
+    use Nette\SmartObject;
+    
     /** @var Nette\Database\Connection */
     protected $pgsql;
 

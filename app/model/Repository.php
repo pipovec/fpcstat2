@@ -5,9 +5,11 @@ use Nette;
 /**
  * Provádí operace nad databázovou tabulkou.
  */
-class Repository extends Nette\SmartObject
+class Repository 
 {
-    /** @var Nette\Database\Connection */
+  use Nette\SmartObject;  
+  
+  /** @var Nette\Database\Connection */
     protected $pgsql;
 
     public function __construct(Nette\Database\Context $db)

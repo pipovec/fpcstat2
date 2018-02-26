@@ -7,11 +7,12 @@ use Nette\Application\Responses;
 use Tracy\ILogger;
 
 
-class ErrorPresenter extends Nette\Object implements Nette\Application\IPresenter
+class ErrorPresenter implements Nette\Application\IPresenter
 {
 	/** @var ILogger */
 	private $logger;
 
+	use Nette\SmartObject;
 
 	public function __construct(ILogger $logger)
 	{
