@@ -46,7 +46,8 @@ class Rebricek
         return $this->ClanCzSk()
                 ->select($table.'.rank,'.$table.'.value,'.$table.'.rank_delta, name, clan_all.clan_id, abbreviation')
                 ->where($table.".value >",0 )
-                ->order($table.".value DESC");
+                ->order($table.".value DESC")
+                ->limit(500);
     }
 
 
