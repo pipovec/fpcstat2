@@ -1,59 +1,56 @@
 {block head}
+<meta name="Keywords" content="The best skirmish tanks, šarvatky">
+<meta name="Description" content="Najviac používané tanky v šarvátkach">
 <title>Prehlad ake tanky jazdia v strongholde</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 {/block}
 
 
 {block content}
 
-<div class="row" style="padding-bottom:10" style="margin-top:30px;">
+<div class="row" style="padding-bottom:10; margin-top:50px;">
 <hr />
 </div>
 <div class="row">
 
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 		<div class="well">
-		    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		    
         <div id="str6bat"></div>
 		
 		</div>
 	</div>
 
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 		<div class="well">
       <div id="str6dmg"></div>
 		</div>
 	</div>
 
-<div class="col-sm-4">
-		<div class="well">
-		
-		</div>
-	</div>
-
 </div>
+
+
 
 <div class="row">
 
-<div class="col-sm-4">
+  <div class="col-sm-6">
 		<div class="well">
-		  
+      <canvas id="StrongholdTier8Battles"></canvas>		  
 		</div>
 	</div>
-
-	<div class="col-sm-4">
-		<div class="well">
-      
-		</div>
-	</div>
-
-<div class="col-sm-4">
-		<div class="well">
-		
-		</div>
-	</div>
-
 </div>
+
+
+<div class="row">
+
+  <div class="col-sm-6">
+      <div class="well">
+        <canvas id="StrongholdTierXBattles"></canvas>		  
+      </div>
+  </div>	
 </div>
+
 
 <script  type="text/javascript">
   google.charts.load('current', { packages: ['corechart', 'bar']});
@@ -71,7 +68,7 @@
       
         var options = {
           height: 350,
-          title: 'Počet bitiek s tankom v Stronghold 6 za včerajšok',
+          title: 'Najpouzivanejsie tanky v Strongholde tier 8 za vcerajsok',
           
           vAxis: {
             title: 'Počet bitiek za deň'
@@ -115,5 +112,62 @@
 
         chart.draw(data, options);
       }
+</script>
+
+
+<script>
+var ctx = document.getElementById("StrongholdTier8Battles");
+var label = {php echo  json_encode($data8batL) };
+var dats = {php echo  json_encode($data8batD) };
+
+var myChart = new Chart(ctx, {
+    
+    type: 'bar',
+    data: {
+       
+        labels: label,        
+        datasets: [{                       
+            label: 'Pocet bitiek',
+            data: dats,
+            backgroundColor: 'rgba(0, 128, 0, 0.3)',
+            borderWidth: 2
+            
+        }]
+    }, 
+    options: {
+        title: {
+          display: true,          
+          text: 'Najpouzivanejsie tanky v Strongholde tier 8 za vcerajsok'
+        }
+    }    
+});
+</script>
+
+<script>
+var ctx = document.getElementById("StrongholdTierXBattles");
+var label = {php echo  json_encode($dataXbatL) };
+var dats = {php echo  json_encode($dataXbatD) };
+
+var myChart = new Chart(ctx, {
+    
+    type: 'bar',
+    data: {
+       
+        labels: label,        
+        datasets: [{                       
+            label: 'Pocet bitiek',
+            data: dats,
+            backgroundColor: 'rgba(238, 130, 238, 0.3)',
+            borderWidth: 2
+            
+        }]
+    }, 
+    options: {
+        title: {
+          display: true,          
+          text: 'Najpouzivanejsie tanky v Strongholde tier 10 za vcerajsok'
+        }
+    }    
+});
 </script>
 {/block}

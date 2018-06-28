@@ -22,11 +22,11 @@ class Stronghold
     }
 
     function Skirmish6battles() {
-        return $this->Skirmish()->where('level',6)->order('battles DESC')->limit(10);            
+        return $this->Skirmish()->where('level',6)->order('battles DESC')->limit(15);            
     }
 
     function Skirmish6damage() {
-        return $this->Skirmish()->where('level',6)->order('damage DESC')->limit(10);            
+        return $this->Skirmish()->where('level',6)->order('damage DESC')->limit(15);            
     }
 
     function Skirmish8battles() {
@@ -34,7 +34,15 @@ class Stronghold
     }
 
     function Skirmish8damage() {
-        return $this->Skirmish()->where('level',8)->order('damage DESC')->limit(10);            
+        return $this->Skirmish()->where('level',8)->order('damage DESC')->limit(15);            
+    }
+
+    function SkirmishXbattles() {
+        return $this->Skirmish()->where('level',10)->order('battles DESC')->limit(10);            
+    }
+
+    function SkirmishXdamage() {
+        return $this->Skirmish()->where('level',10)->order('damage DESC')->limit(10);            
     }
     
 }
