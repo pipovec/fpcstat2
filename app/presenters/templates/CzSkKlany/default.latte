@@ -37,8 +37,13 @@
 
 </div>
 <script>
+
+
 $(document).ready(function() {
-        $('#klany').DataTable({
+		//var dataSet = $.get("/json/cs_klany.json");
+		
+        $('#klany').DataTable({			
+			
 			"processing": true,
 			"serverSide": true,
 			"ajax": "/js/clans_cs.php",
@@ -49,5 +54,5 @@ $(document).ready(function() {
 
 
 
-<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>

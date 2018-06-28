@@ -57,7 +57,7 @@ class RebricekKlanyPresenter extends BasePresenter
 
 	public function handlekampan() {		
 		
-		$clans = $this->model->Kampan()->fetchAll();	
+		$clans = $this->model->Kampan()->fetchAll();
 
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($clans));
 	}
