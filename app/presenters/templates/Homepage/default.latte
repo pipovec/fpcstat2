@@ -2,6 +2,7 @@
 <title>Home Stranky o hracoch a klanoch WOT </title>
 <meta name="Keywords" content="WOT,CZ/SK,WN8,štatistika,najlepší hráči,najlepšie klany">
 <meta name="Description" content="Štatistiky pre hráčov hry World of tanks">
+<script type="text/javascript" src="/js/Chart.bundle.min.js"></script>
 <style>
 #pozadie {
 	background-image: url("/images/tapeta.jpg");
@@ -30,7 +31,7 @@ padding-left: 0px;
 </div>
 
 {*cache*}
-<div class="row" style="margin-bottom:100px;margin-top:100px;">
+<div class="row" style="margin-bottom:100px;margin-top:50px;">
 
     <div class="col-sm-4">
 	   <div class="well">
@@ -60,25 +61,41 @@ padding-left: 0px;
 
     <div class="col-sm-4">
 	    <div class="well">
-		  <a n:href="RebricekHraci:rebricekwn8">
-	      <p><strong>Najlepší Cz/Sk hráči - WN8</strong></p>
-		  </a>
-	      <div class="table-responsive">
-	      <table class=" table table-striped table-condensed responsive">
-	      	{foreach $wn8 as $data}
-            <tr>
-           		{breakIf $iterator->counter == 6}
-           		<td>{$iterator->counter}.</td>
-           		<td>{$data->nickname}</td>
-           		<td>{$data->abbreviation}</td>
-           		<td>{$data->wn8}</td>
-           	</tr>
-           	{/foreach}
-           	</table>
-           	</div>
-           	<p>Celkom: {$cwn8->count}</p>
+		    <a n:href="Stronghold:">
+	        <p><strong>Tanky v ŠARVÁTKACH</strong></p>
+		    </a>
+	      <canvas id="Skirmish" style="position: relative; height:65vh; width:80vw"></canvas>
+
+        <script>
+        var ctx = document.getElementById("Skirmish");
+        var label = {php echo  json_encode($data6batL) };
+        var dats = {php echo  json_encode($data6batD) };
+
+        var myChart = new Chart(ctx, {
+            
+            type: 'bar',
+            data: {              
+                labels: label,        
+                datasets: [{                       
+                    label: 'Pocet bitiek',
+                    data: dats,
+                    backgroundColor: 'rgba(255, 0, 0, 0.3)',
+                    borderWidth: 2
+                    
+                }]
+            }, 
+            options: {
+								responsive: true,
+                title: {
+                  display: false,          
+                  text: 'Najpoužívanejšie tanky v ŠARVÁTKACH tier 6 za včerajšok'
+                }
+            }    
+        });
+      </script>
+        
 	    </div>
-    </div>
+  </div>
 
 
     <div></div>
@@ -90,10 +107,10 @@ padding-left: 0px;
 	      <p><strong>Dnešné odchody z klanov</strong></p>
 		  </a>
 	     	<div class="table-responsive">
-	     	<table class=" table table-striped table-condensed responsive">
+	     	<table class=" table table-striped table-condensed responsive" style="font-size: 0.8em">
 	      	{foreach $odchody as $data}
             <tr>
-           		{breakIf $iterator->counter == 6}
+           		{breakIf $iterator->counter == 10}
            		<td>{$iterator->counter}.</td>
            		<td>{$data->nickname}</td>
            		<td>{$data->abbreviation}</td>

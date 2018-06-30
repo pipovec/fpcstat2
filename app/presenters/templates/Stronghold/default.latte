@@ -1,9 +1,8 @@
 {block head}
-<meta name="Keywords" content="The best skirmish tanks, šarvatky">
+<meta name="Keywords" content="Šarvátky,World of tanks, WOT, skirmish">
 <meta name="Description" content="Najviac používané tanky v šarvátkach">
 <title>Prehlad ake tanky jazdia v strongholde</title>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/js/Chart.bundle.min.js"></script>
 {/block}
 
 
@@ -13,161 +12,220 @@
 <hr />
 </div>
 <div class="row">
-
-	<div class="col-sm-6">
-		<div class="well">
-		    
-        <div id="str6bat"></div>
-		
-		</div>
-	</div>
-
-	<div class="col-sm-6">
-		<div class="well">
-      <div id="str6dmg"></div>
-		</div>
-	</div>
-
-</div>
-
-
-
-<div class="row">
-
   <div class="col-sm-6">
-		<div class="well">
-      <canvas id="StrongholdTier8Battles"></canvas>		  
-		</div>
-	</div>
-</div>
+      <div class="well">
+        <canvas id="SkirmishTier6"></canvas>
+          <script>
+            var ctx = document.getElementById("SkirmishTier6");
+            var label = {php echo  json_encode($data6batL) };
+            var dats = {php echo  json_encode($data6batD) };
 
-
-<div class="row">
+            var myChart = new Chart(ctx, {
+                
+                type: 'bar',
+                data: {
+                  
+                    labels: label,        
+                    datasets: [{                       
+                        label: 'Pocet bitiek',
+                        data: dats,
+                        backgroundColor: 'rgba(255, 0, 0, 0.3)',
+                        borderWidth: 2
+                        
+                    }]
+                }, 
+                options: {
+                    title: {
+                      display: true,          
+                      text: 'Najpoužívanejšie tanky v ŠARVÁTKACH tier 6 za včerajšok'
+                    }
+                }    
+            });
+          </script>		  
+      </div>
+  </div>
 
   <div class="col-sm-6">
       <div class="well">
-        <canvas id="StrongholdTierXBattles"></canvas>		  
+        <canvas id="SkirmishTier67"></canvas>
+          <script>
+            var ctx = document.getElementById("SkirmishTier67");
+            var label = {php echo  json_encode($data6batL7) };
+            var dats = {php echo  json_encode($data6batD7) };
+
+            var myChart = new Chart(ctx, {
+                
+                type: 'bar',
+                data: {
+                  
+                    labels: label,        
+                    datasets: [{                       
+                        label: 'Pocet bitiek',
+                        data: dats,
+                        backgroundColor: 'rgba(255, 50, 0, 0.3)',
+                        borderWidth: 2
+                        
+                    }]
+                }, 
+                options: {
+                    title: {
+                      display: true,          
+                      text: 'Najpoužívanejšie tanky v ŠARVÁTKACH tier 6 za týždeň'
+                    }
+                }    
+            });
+          </script>		  
       </div>
-  </div>	
+  </div>
+
+  
+
+
 </div>
 
 
-<script  type="text/javascript">
-  google.charts.load('current', { packages: ['corechart', 'bar']});
-  google.charts.setOnLoadCallback(drawBasic);
 
-  function drawBasic() {
-        var result = ' {php echo $data6bat; } ';
-      
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Tank');
-        data.addColumn('number', 'Batlles');
+<div class="row">
 
-        data.addRows(JSON.parse(result)) ;
+  <div class="col-sm-6">
+		<div class="well">
+      <canvas id="StrongholdTier8Battles"></canvas>		
+        <script>
+        var ctx = document.getElementById("StrongholdTier8Battles");
+        var label = {php echo  json_encode($data8batL) };
+        var dats = {php echo  json_encode($data8batD) };
 
-      
-        var options = {
-          height: 350,
-          title: 'Najpouzivanejsie tanky v Strongholde tier 8 za vcerajsok',
-          
-          vAxis: {
-            title: 'Počet bitiek za deň'
-          }
-        };
-
-        var chart = new google.visualization.ColumnChart(
-          document.getElementById('str6bat'));
-
-        chart.draw(data, options);
-      }
-</script>
-
-
-
-<script  type="text/javascript">
-  google.charts.load('current', { packages: ['corechart', 'bar']});
-  google.charts.setOnLoadCallback(drawBasic);
-
-  function drawBasic() {
-        var result = ' {php echo $data6dmg; } ';
-      
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Tank');
-        data.addColumn('number', 'AVG Damage');
-
-        data.addRows(JSON.parse(result)) ;
-
-      
-        var options = {
-          height: 350,
-          title: 'Priemerny damage s tankom v Stronghold 6 za včerajšok',
-          
-          vAxis: {
-            title: 'Priemerny damage za deň'
-          }
-        };
-
-        var chart = new google.visualization.ColumnChart(
-          document.getElementById('str6dmg'));
-
-        chart.draw(data, options);
-      }
-</script>
-
-
-<script>
-var ctx = document.getElementById("StrongholdTier8Battles");
-var label = {php echo  json_encode($data8batL) };
-var dats = {php echo  json_encode($data8batD) };
-
-var myChart = new Chart(ctx, {
-    
-    type: 'bar',
-    data: {
-       
-        labels: label,        
-        datasets: [{                       
-            label: 'Pocet bitiek',
-            data: dats,
-            backgroundColor: 'rgba(0, 128, 0, 0.3)',
-            borderWidth: 2
+        var myChart = new Chart(ctx, {
             
-        }]
-    }, 
-    options: {
-        title: {
-          display: true,          
-          text: 'Najpouzivanejsie tanky v Strongholde tier 8 za vcerajsok'
-        }
-    }    
-});
-</script>
+            type: 'bar',
+            data: {
+              
+                labels: label,        
+                datasets: [{                       
+                    label: 'Pocet bitiek',
+                    data: dats,
+                    backgroundColor: 'rgba(0, 128, 0, 0.3)',
+                    borderWidth: 2
+                    
+                }]
+            }, 
+            options: {
+                title: {
+                  display: true,          
+                  text: 'Najpoužívanejšie tanky v ŠARVÁTKACH tier 8 za včerajšok'
+                }
+            }    
+        });
+      </script>  
+		</div>
+	</div>
 
-<script>
-var ctx = document.getElementById("StrongholdTierXBattles");
-var label = {php echo  json_encode($dataXbatL) };
-var dats = {php echo  json_encode($dataXbatD) };
+  <div class="col-sm-6">
+		<div class="well">
+      <canvas id="StrongholdTier8Battles7"></canvas>		
+        <script>
+        var ctx = document.getElementById("StrongholdTier8Battles7");
+        var label = {php echo  json_encode($data8batL7) };
+        var dats = {php echo  json_encode($data8batD7) };
 
-var myChart = new Chart(ctx, {
-    
-    type: 'bar',
-    data: {
-       
-        labels: label,        
-        datasets: [{                       
-            label: 'Pocet bitiek',
-            data: dats,
-            backgroundColor: 'rgba(238, 130, 238, 0.3)',
-            borderWidth: 2
+        var myChart = new Chart(ctx, {
             
-        }]
-    }, 
-    options: {
-        title: {
-          display: true,          
-          text: 'Najpouzivanejsie tanky v Strongholde tier 10 za vcerajsok'
-        }
-    }    
-});
-</script>
+            type: 'bar',
+            data: {
+              
+                labels: label,        
+                datasets: [{                       
+                    label: 'Pocet bitiek',
+                    data: dats,
+                    backgroundColor: 'rgba(0, 128, 50, 0.3)',
+                    borderWidth: 2
+                    
+                }]
+            }, 
+            options: {
+                title: {
+                  display: true,          
+                  text: 'Najpoužívanejšie tanky v ŠARVÁTKACH tier 8 za týždeň'
+                }
+            }    
+        });
+      </script>  
+		</div>
+	</div>
+
+
+</div>
+
+
+<div class="row">
+  <div class="col-sm-6">
+      <div class="well">
+        <canvas id="StrongholdTierXBattles"></canvas>
+          <script>
+            var ctx = document.getElementById("StrongholdTierXBattles");
+            var label = {php echo  json_encode($dataXbatL) };
+            var dats = {php echo  json_encode($dataXbatD) };
+
+            var myChart = new Chart(ctx, {
+                
+                type: 'bar',
+                data: {
+                  
+                    labels: label,        
+                    datasets: [{                       
+                        label: 'Pocet bitiek',
+                        data: dats,
+                        backgroundColor: 'rgba(238, 130, 238, 0.3)',
+                        borderWidth: 2
+                        
+                    }]
+                }, 
+                options: {
+                    title: {
+                      display: true,          
+                      text: 'Najpoužívanejšie tanky v ŠARVÁTKACH tier 10 za včerajšok'
+                    }
+                }    
+            });
+          </script>		  
+      </div>
+  </div>
+
+  <div class="col-sm-6">
+      <div class="well">
+        <canvas id="StrongholdTierXBattles7"></canvas>
+          <script>
+            var ctx = document.getElementById("StrongholdTierXBattles7");
+            var label = {php echo  json_encode($dataXbatL7) };
+            var dats = {php echo  json_encode($dataXbatD7) };
+
+            var myChart = new Chart(ctx, {
+                
+                type: 'bar',
+                data: {
+                  
+                    labels: label,        
+                    datasets: [{                       
+                        label: 'Pocet bitiek',
+                        data: dats,
+                        backgroundColor: 'rgba(238, 80, 238, 0.3)',
+                        borderWidth: 2
+                        
+                    }]
+                }, 
+                options: {
+                    title: {
+                      display: true,          
+                      text: 'Najpoužívanejšie tanky v ŠARVÁTKACH tier 10 za týždeň'
+                    }
+                }    
+            });
+          </script>		  
+      </div>
+  </div>
+
+
+
+</div>
+
 {/block}

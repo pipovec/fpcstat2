@@ -16,33 +16,33 @@ class Stronghold
     public function __construct(Nette\Database\Context $db) {
         $this->pgsql = $db;
     }
+   
 
-    private function Skirmish () {
-        return $this->pgsql->table("skirmish");
+    function TanksBattles(string $table, int $level, int $limit) {
+        $query = "
+        SELECT $table.tank_id, sum($table.battles) AS battles, avg($table.damage_dealt)::integer AS damage,encyclopedia_vehicles.name,encyclopedia_vehicles.level
+        FROM $table
+        LEFT JOIN encyclopedia_vehicles ON encyclopedia_vehicles.tank_id = $table.tank_id
+        WHERE $table.date = ('now'::text::date - '1 day'::interval) AND level = $level
+        GROUP BY $table.tank_id, encyclopedia_vehicles.name, encyclopedia_vehicles.level
+        ORDER BY battles DESC
+        LIMIT $limit
+        ";
+
+        return $this->pgsql->query($query);
     }
 
-    function Skirmish6battles() {
-        return $this->Skirmish()->where('level',6)->order('battles DESC')->limit(15);            
-    }
+    function TanksBattles7(string $table, int $level, int $limit)   {
+        $query = "
+        SELECT $table.tank_id, sum($table.battles) AS battles, avg($table.damage_dealt)::integer AS damage,encyclopedia_vehicles.name,encyclopedia_vehicles.level
+        FROM $table
+        LEFT JOIN encyclopedia_vehicles ON encyclopedia_vehicles.tank_id = $table.tank_id
+        WHERE $table.date > ('now'::text::date - '7 day'::interval) AND level = $level
+        GROUP BY $table.tank_id, encyclopedia_vehicles.name, encyclopedia_vehicles.level
+        ORDER BY battles DESC
+        LIMIT $limit
+        ";
 
-    function Skirmish6damage() {
-        return $this->Skirmish()->where('level',6)->order('damage DESC')->limit(15);            
+        return $this->pgsql->query($query);
     }
-
-    function Skirmish8battles() {
-        return $this->Skirmish()->where('level',8)->order('battles DESC')->limit(10);            
-    }
-
-    function Skirmish8damage() {
-        return $this->Skirmish()->where('level',8)->order('damage DESC')->limit(15);            
-    }
-
-    function SkirmishXbattles() {
-        return $this->Skirmish()->where('level',10)->order('battles DESC')->limit(10);            
-    }
-
-    function SkirmishXdamage() {
-        return $this->Skirmish()->where('level',10)->order('damage DESC')->limit(10);            
-    }
-    
 }
