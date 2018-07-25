@@ -2,7 +2,6 @@
 <title>Home Stranky o hracoch a klanoch WOT </title>
 <meta name="Keywords" content="WOT,CZ/SK,WN8,štatistika,najlepší hráči,najlepšie klany">
 <meta name="Description" content="Štatistiky pre hráčov hry World of tanks">
-<script type="text/javascript" src="/js/Chart.bundle.min.js"></script>
 <style>
 #pozadie {
 	background-image: url("/images/tapeta.jpg");
@@ -30,7 +29,7 @@ padding-left: 0px;
 </div>
 </div>
 
-{*cache*}
+
 <div class="row" style="margin-bottom:100px;margin-top:50px;">
 
     <div class="col-sm-4">
@@ -65,7 +64,7 @@ padding-left: 0px;
 	        <p><strong>Tanky v ŠARVÁTKACH</strong></p>
 		    </a>
 	      <canvas id="Skirmish" style="position: relative; height:65vh; width:80vw"></canvas>
-
+        <script type="text/javascript" src="/js/Chart.bundle.min.js"></script>
         <script>
         var ctx = document.getElementById("Skirmish");
         var label = {php echo  json_encode($data6batL) };
@@ -99,7 +98,7 @@ padding-left: 0px;
 
 
     <div></div>
-{*/cache*}
+
 
     <div class="col-sm-4">
 	    <div class="well">
