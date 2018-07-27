@@ -28,7 +28,7 @@
            		<td>{$data->nickname}</td>
            		<td>{$data->abbreviation}</td>
            		<td>{$data->role}</td>
-           		<td>{$data->wn8}</td>
+           		<td class="wn8">{$data->wn8}</td>
            		<td>{$data->global_rating}</td>
            	</tr>
            {/foreach}
@@ -55,5 +55,55 @@
     });
     </script>
 
+    <script type="text/javascript">
+
+
+
+$('td.wn8').each( function( index ) {    
+    var wn = $( this ).text();   
+    var cellData = parseInt(wn);
+    console.log(cellData);
+
+    switch(true) {
+    case ( cellData < 300) :
+                    $( this ).css('background-color', '#000000');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    case  (cellData >= 300 && cellData <= 599 ) :
+                    $( this ).css('background-color', '#cd3333');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    case  (cellData >= 600 && cellData <= 899 ) :
+                    $( this ).css('background-color', '#d77900');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    case  (cellData >= 900 && cellData <= 1249 ) :
+                    $( this ).css('background-color', '#d7b600');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    case  (cellData >= 1250 && cellData <= 1599 ) :
+                    $( this ).css('background-color', '#6d9521');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    case  (cellData >= 1600 && cellData <= 1899 ) :
+                    $( this ).css('background-color', '#4c762e');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    case  (cellData >= 1900 && cellData <= 2349 ) :
+                    $( this ).css('background-color', '#4a92b7');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    case  (cellData >= 2350 && cellData <= 2899 ) :
+                    $( this ).css('background-color', '#83579d');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    case  (cellData >= 2900  ) :
+                    $( this ).css('background-color', '#5a3175');
+                    $( this ).css('color', '#FFFFFF');
+                    break;
+    }
+});
+
+</script>
 
    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
