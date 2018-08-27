@@ -5,10 +5,10 @@ use Nette;
 /**
  * Provádí operace nad databázovou tabulkou.
  */
-class Repository 
+class Repository
 {
-  use Nette\SmartObject;  
-  
+  use Nette\SmartObject;
+
   /** @var Nette\Database\Connection */
     protected $pgsql;
 
@@ -90,7 +90,7 @@ class Repository
     function ClansEffe()
     {
 
-      return $this->pgsql->query("select c.abbreviation,c.emblems_small,cr.value, cr.rank, cr.rank_delta from cr_efficiency cr
+      return $this->pgsql->query("select c.clan_id, c.abbreviation,c.emblems_small,cr.value, cr.rank, cr.rank_delta from cr_efficiency cr
                                   left join clan_all c on c.clan_id = cr.clan_id
                                   where c.clan_id in (select clan_id from tmp_clans_cs)
                                   order by cr.value DESC
@@ -150,7 +150,7 @@ class Repository
       return $this->pgsql->table('players_pass');
     }
 
-    function Stats() 
+    function Stats()
     {
       return $this->pgsql->table('stats');
     }
