@@ -7,12 +7,12 @@ use Nette,
 
 class HomepagePresenter extends BasePresenter
 {
-    
+
     function  __construct()
-    {                      
-      
+    {
+
     }
-    
+
     /** @var \App\Model\Repository @inject */
     public $Repository;
 
@@ -20,69 +20,15 @@ class HomepagePresenter extends BasePresenter
     public $Rebricek;
 
     /** @var \App\Model\Stronghold @inject */
-    public $strong; 
+    public $strong;
 
-    function Odchody()
-    {
-    	return $this->Repository->AktualneOdchody();
-
-    }
-
-    function CountOdchody()
-    {
-        $count = $this->Repository->CountOdchody()->fetchAll();
-        $count = $count[0];
-
-        return $count;
-    }
-
-    function Wn8()
-    {
-        return $this->Repository->HraciWn8();
-    }
-
-    function CountWn8()
-    {
-        $count = $this->Repository->CountHraciWn8()->fetchAll();
-        $count = $count[0];
-
-        return $count;
-    }
-
-    function Gr()
-    {
-        return $this->Repository->HraciGr();
-    }
-
-    function CountGr()
-    {
-        $count = $this->Repository->CountHraciGr()->fetchAll();
-        $count = $count[0];
-
-        return $count;
-    }
-
-    function CzSkKlans()
-    {
-        return $this->Repository->ClanCz5();
-    }
-
-    function ClansCsTop()
-    {
-        return $this->Repository->ClansEffe();
-    }
 
     function ChangedNicks()
     {
         return $this->Repository->ChangeNick();
-    }
-
-    function Wn8clan()
-    {
-
-        return $this->Rebricek->Wn8Clans(0,5);
 
     }
+
 
     function StrongholdTanks($level)
     {
@@ -99,43 +45,33 @@ class HomepagePresenter extends BasePresenter
         return $this->StrongholdTanks(8);
     }
 
-    private $str6BattlesLabel;    
+    private $str6BattlesLabel;
     private $str6BattlesData;
 
     function Str6battles() {
-        
+
         $i = 0;
         $result = $this->strong->TanksBattles("pvs_skirmish_history", 6, 10);
         foreach($result as $res) {
 
             $this->str6BattlesLabel[$i] = $res->name;
-            $this->str6BattlesData[$i] = $res->battles;            
-            
+            $this->str6BattlesData[$i] = $res->battles;
+
             $i++;
         }
-    }   
+    }
 
 
     public function renderDefault()
     {
-        
+
         $this->SaveRequest();
         $this->Str6battles();
-        
-        $this->template->odchody    = $this->Odchody();
-        $this->template->wn8        = $this->Wn8();
-        $this->template->gr         = $this->Gr();
 
-        $this->template->codchody    = $this->CountOdchody();
-        $this->template->cwn8        = $this->CountWn8();
-        $this->template->cgr         = $this->CountGr();
-
-        $this->template->clans      = $this->CzSkKlans();
-        $this->template->clanseff   = $this->ClansCsTop();
 
         $this->template->chnick     = $this->ChangedNicks();
 
-        $this->template->clanWn8    = $this->Wn8clan();
+
 
         $this->template->s6         = $this->Stronghold6();
         $this->template->s8         = $this->Stronghold8();

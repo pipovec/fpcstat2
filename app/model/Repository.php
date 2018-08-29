@@ -68,7 +68,7 @@ class Repository
       return $this->pgsql->query("SELECT count(*) FROM rebricek_gr_players");
     }
 
-    private function ClanAll()
+    function ClanAll()
     {
       return $this->pgsql->table('clan_all');
     }

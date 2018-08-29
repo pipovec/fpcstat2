@@ -6,28 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Statistiky pre hracov hry world of tanks. Ceske klany, rebricky klanov">
     <meta name="author" content="Boris Fekar">
     <meta name="email" content="info@fpcstat.cz">
 
     <link rel=icon href="{$basePath}/images/predator1.png" sizes="16x16" type="image/png">
-
-
-
-    <!--script async type="text/javascript" src="/js/jquery.3.3.1.min.js"></script-->
-    <!--script async type="text/javascript" src="/js/bootstrap.3.3.7.min.js"></script-->
-
-    <!-- Custom Fonts -->
-    <!--link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'"-->
-
-    <!-- Latest compiled and minified CSS -->
-    <!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
-
-    <!-- Optional theme -->
-    <!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"-->
-
-    <!-- Latest compiled and minified JavaScript -->
-    <!-- script async src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script-->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.3.3.7.min.js"></script>
 
 {include #head}
 </head>
@@ -74,6 +58,7 @@
             <li><a n:href="RebricekKlany:wn8random">Rebríček klanov Cz/Sk WN8</a></li>
             <li><a n:href="RebricekKlany:armsrace">Rebríček klanov Cz/Sk Zavody v zbrojeni</a></li>
             <li><a n:href="Stronghold:">Najpoužívanešie tanky v šarvatkach /beta/</a></li>
+            <li><a n:href="Season:">Hodnotenie sezóny č.8 na globálnej mape</a></li>
           </ul>
         </li>
 
@@ -95,17 +80,36 @@
 <!-- Tu sa budu natahovat udaje s template -->
 {include content}
 
-</div>
+
+<!-- Matomo Image Tracker-->
+<noscript>img src="https://piwik.fpclan.cz/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" /></noscript>
+<!-- End Matomo -->
 
 
-<script async type="text/javascript" src="/js/jquery.3.3.1.min.js"></script>
-<script async type="text/javascript" src="/js/bootstrap.3.3.7.min.js"></script>
-<!--script async type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script-->
+
+
+
 <link rel="stylesheet" href="/css/bootstrap.3.3.7.min.css">
 <link rel="stylesheet" href="/css/bootstrap-theme.3.3.7.min.css">
 <link rel="stylesheet" href="/css/mystyle.css">
 
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.fpclan.cz/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
 
 </body>
-{include #assets}
+
 </html>

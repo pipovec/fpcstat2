@@ -1,0 +1,84 @@
+{block head}
+<meta name="Description" content="Prehľad o tom ako si vedú české a slovenské klany na globalnej mape hry World of tanks.">
+<title>Sezóna na globalnej mape Českých a Slovenskych klanov | FPCSTAT</title>
+<style>
+@media screen and (min-width: 601px) {
+  body {
+    font-size: 14px !important;
+  }
+}
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+body {
+    font-size: 4px !important;
+  }
+}
+</style>
+{/block}
+{block content}
+<div class="row" style="margin-top:50px;">
+  <div class="col-md-6">
+    <h4>Hodnotenie sezóny č.8 na globalnej mape s tankmi tieru 10 České a Slovenské klany</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+        <th>Poradie Cz/Sk</th>
+        <th>Znak</th>
+        <th>Tag</th>
+        <th>Nazov</th>
+        <th></th>
+        <th>Ocenenie</th>
+        <th>Vitazne body</th>
+        <th>Poradie celkom</th>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach $season_10 as $value}
+        <tr>
+          <td class="text-center">{$iterator->counter}.</td>
+          <td><img src="/images/emblems32/{$value['clan_id']}_emblem_conv.png"></td>
+          <td>{$value['tag']}</td>
+          <td>{$value['name']}</td>
+          <td style="background-color: {$value['color']|noescape}"></td>
+          <td>{$value['award_level']}</td>
+          <td>{$value['victory_points']}</td>
+          <td class="text-center">{$value['rank']}.</td>
+        </tr>
+        {/foreach}
+    </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <h4>Hodnotenie sezóny č.8 na globalnej mape s tankmi tieru 8 České a Slovenské klany</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+        <th>Poradie Cz/Sk</th>
+        <th>Znak</th>
+        <th>Tag</th>
+        <th>Nazov</th>
+        <th></th>
+        <th>Ocenenie</th>
+        <th>Vitazne body</th>
+        <th>Poradie celkom</th>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach $season_8 as $value}
+        <tr>
+          <td class="text-center">{$iterator->counter}.</td>
+          <td><img src="/images/emblems32/{$value['clan_id']}_emblem_conv.png"></td>
+          <td>{$value['tag']}</td>
+          <td>{$value['name']}</td>
+          <td style="background-color: {$value['color']|noescape}"></td>
+          <td>{$value['award_level']}</td>
+          <td>{$value['victory_points']}</td>
+          <td class="text-center">{$value['rank']}.</td>
+        </tr>
+        {/foreach}
+    </tbody>
+    </table>
+  </div>
+</div>
+{/block}

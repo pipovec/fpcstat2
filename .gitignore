@@ -1,0 +1,11 @@
+app/config/config.local.neon
+app/config/config.neon
+
+composer.json
+composer.lock
+
+vendor/
+temp/
+log/
+www/js/DataTables/
+

@@ -1,14 +1,16 @@
 {block head}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
-<title>Ceske a Slovenske klany WOT </title>
+<title>České a Slovenské klany World of tanks </title>
+<meta name="description" content="Najaktuálnejšia databáza klanov hry World of tanks. Zoznam iba českých a slovenských klanov">
 {/block}
 
 {block content}
 
-	<div class="col-sm-12" style="margin-top:30px;">
-		<h4 class="page-header">České a slovenské klany </h4>
+	<div class="row" style="margin-top:60px;">
+		<p><span style="font-size: 1.2em"><strong>České a slovenské klany </strong></span><br />
+		Najaktuálnejšia databáza klanov hry World of tanks. Zoznam iba českých a slovenských klanov ktoré sa denne aktualizujú a analyzujú.
 	</div>
-</div>
+	<hr>
 <div class="row">
 	<div class="col-sm-10">
 
@@ -41,13 +43,13 @@
 
 $(document).ready(function() {
 		//var dataSet = $.get("/json/cs_klany.json");
-		
-        $('#klany').DataTable({			
-			
+
+        $('#klany').DataTable({
+
 			"processing": true,
 			"serverSide": true,
 			"ajax": "/js/clans_cs.php",
-            "lengthMenu": [[15, 50, 100], [15, 50, 100]]            
+            "lengthMenu": [[15, 50, 100], [15, 50, 100]]
         });
     });
 </script>
