@@ -8,11 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Boris Fekar">
     <meta name="email" content="info@fpcstat.cz">
-
+    <meta name="google-site-verification" content="Zj-ImjHS46hTS5AtXCBxovl5UbXSDDBECNrygomGq1Q" />
+    <link rel="manifest" href="/js/manifest.json">
     <link rel=icon href="{$basePath}/images/predator1.png" sizes="16x16" type="image/png">
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.3.3.7.min.js"></script>
-
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
 {include #head}
 </head>
 
@@ -43,9 +45,11 @@
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Hraci<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <!--<li><a n:href="InfoHrac:">Informacie o hracovi</a></li>-->
-            <li><a n:href="Odchody:">Odchody z klanov</a></li>
+            <li><a n:href="Odchody:rozsirene">Odchody z klanov v.2</a></li>
+            <li><a n:href="Odchody:">Odchody z klanov starsia verzia</a></li>
+            <li><a n:href="InfoHrac:">Vela nepotrebnych informacii </a></li>
             <li><a n:href="RebricekHraci:rebricekwn8">Rebricek WN8</a></li>
-            <li><a n:href="RebricekHraci:rebricekgr">Rebricek GR</a></li>
+            <!-- <li><a n:href="RebricekHraci:rebricekgr">Rebricek GR</a></li>-->
 	    <li><a n:href="Nabor:">Nabor</a></li>
           </ul>
         </li>
@@ -53,12 +57,12 @@
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Klany<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a n:href="CzSkKlany:">Zoznam klanov Cz/Sk</a></li>
-            <li><a n:href="RebricekKlany:">Rebríčky klanov Cz/Sk</a></li>
+            <!--<li><a n:href="RebricekKlany:">Rebríčky klanov Cz/Sk</a></li>-->
             <li><a n:href="RebricekKlany:history">Historicke udaje</a></li>
             <li><a n:href="RebricekKlany:wn8random">Rebríček klanov Cz/Sk WN8</a></li>
             <li><a n:href="RebricekKlany:armsrace">Rebríček klanov Cz/Sk Zavody v zbrojeni</a></li>
             <li><a n:href="Stronghold:">Najpoužívanešie tanky v šarvatkach /beta/</a></li>
-            <li><a n:href="Season:">Hodnotenie sezóny č.8 na globálnej mape</a></li>
+            <li><a n:href="Season:">Hodnotenie sezóny č.10 na globálnej mape</a></li>
           </ul>
         </li>
 
@@ -87,10 +91,12 @@
 
 
 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
-<link rel="stylesheet" href="/css/bootstrap.3.3.7.min.css">
-<link rel="stylesheet" href="/css/bootstrap-theme.3.3.7.min.css">
+<!-- My style -->
 <link rel="stylesheet" href="/css/mystyle.css">
 
 <!-- Matomo -->
@@ -109,6 +115,12 @@
 </script>
 <!-- End Matomo Code -->
 
+<!-- Firebase push message -->
+<!--script src="https://www.gstatic.com/firebasejs/5.5.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase-messaging.js"></script>
+<!--script src="/js/webpush.js"></script-->
+
+</script>
 
 </body>
 

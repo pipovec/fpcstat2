@@ -1,60 +1,117 @@
 {block head}
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
-<title>České a Slovenské klany World of tanks </title>
-<meta name="description" content="Najaktuálnejšia databáza klanov hry World of tanks. Zoznam iba českých a slovenských klanov">
+<title>Informácie o Cz/Sk klanoch World of tanks | FPCSTAT</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+
+
 {/block}
+
 
 {block content}
 
-	<div class="row" style="margin-top:60px;">
-		<p><span style="font-size: 1.2em"><strong>České a slovenské klany </strong></span><br />
-		Najaktuálnejšia databáza klanov hry World of tanks. Zoznam iba českých a slovenských klanov ktoré sa denne aktualizujú a analyzujú.
-	</div>
-	<hr>
-<div class="row">
-	<div class="col-sm-10">
+<div class="row justify-content-center" style="margin-top: 40px; font-family: Roboto;">
 
-			<table width="100%" class="table table-striped table-bordered table-hover" id="klany">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Nazov</th>
-						<th>Skratka</th>
-						<th>Clenov</th>
-						<th>Zalozeny</th>
-						<th>WN8</th>
-						<th>Winrate</th>
-					</tr>
-				</thead>
-			</table>
-	</div>
-
-
-<div class="col-sm-2">
-{include '../reklama.1.latte'}
-{include '../reklama.latte'}
-
-
+    <div class="col-sm-offset-1 col-sm-10"  n:syntax="off" >
+          <h1 style="font-size: 26px">Zoznam českých a slovenských klanov hry WOT</h1>
+          <div class="table-responsive-sm" id="pokus">
+          <table class="table table-striped table-sm">
+            <thead id="hlavicka">
+            <tr>
+                <th>#</th>
+                <th><a @click="order('tag')">TAG</a></th>
+                <th><a @click="order('name')">NAZOV</a></th>
+                <th><a @click="order('created_at')">ZALOZENY</a></th>
+                <th><a @click="order('members_count')">POCET CLENOV</a></th>
+                <th><a @click="order('wn8')">WN8</a></th>
+                <th><a @click="order('winrate')">WINRATE</a></th>
+              </tr>
+              <!--tr>
+                <th></th>
+                <th><input id="input" placeholder="tag"/></th>
+                <th><input id="input" placeholder="nazov klanu"/></th>
+                <th><input id="input" placeholder="zalozeny"/></th>
+                <th><input id="input" placeholder="pocet clenov"/></th>
+              </tr-->
+            </thead>
+            <tbody>
+                 <tr v-for="values of json.data">
+                   <td><img :src="values.emblem" :alt="values.name + ' emblem'"></td>
+                   <td v-html="values.abbreviation"></td>
+                   <td v-html="values.name"></td>
+                   <td v-html="values.created_at"></td>
+                   <td v-html="values.members_count"></td>
+                   <td v-html="values.wn8"></td>
+                   <td v-html="values.winrate"></td>
+                 </tr>
+            </tbody>
+            
+          </table>
+          <div style="font-size: 1rem;">Čas dotazu: <strong v-text="json.cas"></strong> Počet CZ/SK klanov: <strong v-text="json.count"></strong></div>
+        </div>
+    </div>
 </div>
 
-</div>
-<script>
-
-
-$(document).ready(function() {
-		//var dataSet = $.get("/json/cs_klany.json");
-
-        $('#klany').DataTable({
-
-			"processing": true,
-			"serverSide": true,
-			"ajax": "/js/clans_cs.php",
-            "lengthMenu": [[15, 50, 100], [15, 50, 100]]
-        });
-    });
-</script>
 
 
 
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<style type="text/css">
+
+#hlavicka a   {
+  box-shadow: 3px 3px 1px rgba(0,0,0,0.4);
+  width: 100%;
+  color: black;
+  float: none;
+  display: inline-block;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  font-weight: 300;
+  font-size: 1rem;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+  border-top-width: 0px;
+  border-top-style: none;
+  border-right-width: 0px;
+  border-right-style: none;
+  border-bottom-width: 0px;
+  border-bottom-style: none;
+  border-left-width: 0px;
+  border-left-style: none;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+#hlavicka th {
+  text-align: center;
+}
+
+
+#hlavicka a:hover{
+    color: black;
+    position: relative;
+    top: 3px;
+    text-decoration: none;
+    box-shadow: 1px 1px rgba(0,0,0,0.3);
+}
+.vuehlavicka {
+    box-shadow: 4px 4px 2px rgba(0,0,0,0.5);
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+  }
+
+table {    
+    table-layout: fixed;
+    word-wrap: break-word;
+    text-align: center;
+    width: 100%;
+}
+
+</style>
+<!--script src="{$basePath}/js/vue.min.js"></script-->
+<script src="{$basePath}/js/vue.js"></script>
+
+<script type="text/javascript" src="/js/CzSkKlany/czskklany.vue"></script>
+{/block}

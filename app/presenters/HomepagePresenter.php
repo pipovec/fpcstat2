@@ -29,12 +29,12 @@ class HomepagePresenter extends BasePresenter
 
     }
 
-
+    
     function StrongholdTanks($level)
     {
         return $this->Rebricek->StrongholdTanks($level);
     }
-
+    
     function Stronghold6()
     {
         return $this->StrongholdTanks(6);
@@ -44,7 +44,7 @@ class HomepagePresenter extends BasePresenter
     {
         return $this->StrongholdTanks(8);
     }
-
+    
     private $str6BattlesLabel;
     private $str6BattlesData;
 
@@ -71,11 +71,9 @@ class HomepagePresenter extends BasePresenter
 
         $this->template->chnick     = $this->ChangedNicks();
 
-
-
         $this->template->s6         = $this->Stronghold6();
         $this->template->s8         = $this->Stronghold8();
-
+        
         $this->template->data6batL = $this->str6BattlesLabel;
         $this->template->data6batD = $this->str6BattlesData;
     }

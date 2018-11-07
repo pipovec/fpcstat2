@@ -2,73 +2,52 @@
 
 namespace App\Presenters;
 
-use Nette,
-    App\Model,
-    Nette\Application\UI,
-    Nette\Application\UI\Form;
+use
+    Nette\Caching\Cache,
+    Nette;
+
+
 
 class InfoHracPresenter extends BasePresenter
 {
+    private $conn;
+    private $cache;
+    private $clan_ids;
 
-    function  __construct()
-    {                      
-        
+    public function __construct(\App\Model\Repository $repo)
+    {
+      $this->conn = $repo;
+
+      $storage = new Nette\Caching\Storages\FileStorage('temp');
+      $this->cache = new Cache($storage);
+
+      $this->ClansCzSK();
     }
 
-    /** @var \App\Model\Repository @inject */
-    public $model;
+    /** @return object of CZ/SK clans */
+    private function ClansCzSK()
+    {
+      $value = $this->cache->load('clans-info');
 
-    public $request = 0;
-    public $wn8player ;
+    if($value === null) {
 
-    protected function createComponentChat()
+        $clan_ids =  $this->conn->ClanAll()->where('language', 'cs')->where('members_count >', 0)->limit(20)->fetchAll();
+        foreach($clan_ids as $value) {
+          $this->clan_ids[] = array('clan_id' => $value->clan_id, 'abbreviation'=> $value->abbreviation, 'created_at'=> date('Y-m-d H:m:s',$value->created_at), 'name'=> $value->name, 'emblem' =>  "/images/emblems32/".$value->clan_id."_emblem_conv.png", 'members_count'=> $value->members_count);
+        }
+        $this->cache->save('clans-info', $this->clan_ids);
+
+      }
+      else {
+        $this->clan_ids = $value;
+      }
+    }
+
+
+
+   function renderCzklany()
    {
-       $form = new UI\Form;
-       $form->addText('nick', 'Nick:')->setRequired(FALSE)->addRule(Form::MIN_LENGTH,'Nick musí mať aspoň %d znaky', 3);
-       $form->addSubmit('send', 'Odosli');
-       $form->onSuccess[] = [$this, 'send'];
-       return $form;
-
-   }
-   function handleUrob($c,$d)
-   {
-
-        $httpRequest = $this->getHttpRequest();
-        $this->request = $httpRequest->getQuery();
-        if ($this->isAjax())
-                {$this->redrawControl('form');}
-
-   }
-
-   public function Send($form)
-   {
-    //$this->model->SpracujFormular($form);
-
-    // Rovno to potom cele prekresli
-    if ($this->isAjax())
-              {$this->redrawControl('form');}
-   }
-
-   function handlewn8player($nickname)
-   {
-        $this->wn8player = $this->model->wn8player_history($nickname)->fetchAll();
-        $this->sendResponse(new Nette\Application\Responses\JsonResponse($this->wn8player));
-   }
-
-   function handleFindId($nickname)
-   {
-        $player = $this->model->FindPlayer($nickname)->fetchAll();
-        
-        $this->sendResponse(new Nette\Application\Responses\JsonResponse($player));
-   }
-
-
-   function renderDefault()
-   {
-        $this->SaveRequest();
-        $this->template->data = $this->request;
-        $this->template->w8pl = $this->wn8player;
-
+     $this->template->json = json_encode($this->clan_ids);
    }
 
 }

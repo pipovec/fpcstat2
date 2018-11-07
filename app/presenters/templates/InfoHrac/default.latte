@@ -1,35 +1,19 @@
 {block head}
-<title>FPCSTAT | Informácie o hráčoch hry World of tanks</title>>
-
-
-<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
-<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
-<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-<link href="{$basePath}/static/css/main.6f738b2f.css" rel="stylesheet">
+<title>Informácie o hráčoch hry World of tanks - FPCSTAT</title>>
 
 {/block}
 
 
 {block content}
 
-<div class="row justify-content-center" style="margin-top:30px;">
-    <div class="col-sm-offset-1  col-sm-4" id="root">
-        <script type="text/javascript" src="{$basePath}/static/js/main.61ec3616.js"></script>
-    </div>
+<div class="row justify-content-center" style="margin-top: 40px;">
+  <h1>Veľa zbytočných informácii o hráčoch</h1>
+  <p>Strašne veľa zbytočných informácii o hráčoch hry world of tanks, ktoré o vás registruje wargaming. Fakt neužitočné koniny ktoré asi nikoho nebudú zaujímať. Dal som ich sem preto,
+     lebo som bol sám prekvapený aké info o vas wargaming zbiera. Program je napisaný v React js a zatial medzi každým hráčom ktorého hľadáte treba refreshnúť stránku. Neskôr sa mi táto
+     chyba dúfam podarí odtrániť. Informácie sú zobrazovené presnejšie a rýchlejšie ako na stránkach LAB VOLE a preto sú lepšie :D. <p>
+<div id="root"></div>
 </div>
 
-<!-- Hladanie v databaze -->
-
-<div class="row justify-content-center">
-    <div class="col-sm-offset-1 col-sm-4" id="wn8player">
-        <script type="text/babel" src="{$basePath}/js/react/w8player.js"></script>
-    </div>
-</div>
-
-
-
-
-
-
-
+<script src="{$basePath}/js/react/playerstat/js/main.222f081c.js"></script>
+<link rel="stylesheet" href="{$basePath}/js/react/playerstat/css/main.d364e11b.css">
 {/block}
