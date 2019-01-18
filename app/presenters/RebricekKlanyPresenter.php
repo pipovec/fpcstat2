@@ -10,23 +10,23 @@ namespace App\Presenters;
 
 use Nette,
 	Nette\Application\UI,
-	
+
     App\Model;
 
 class RebricekKlanyPresenter extends BasePresenter
 {
-	
+
 	public $table;
-    public $top;  
+    public $top;
 	public static $draw = 1;
 	public $data;
 	public $isKlan ;
 
 	function  __construct()
-    {                      
-       
+    {
+
     }
-    
+
 	/** @var \App\Model\Rebricek @inject */
   	public $model;
 
@@ -35,28 +35,28 @@ class RebricekKlanyPresenter extends BasePresenter
 		return $this->model->Pokus();
 	}
 
-	
+
 	public function Top()
     {
-        $table = ':cr_efficiency';
+        $table = 'cr_efficiency';
         return $this->model->StatClans($table);
     }
 
 	public function handleAjaxTop($table)
     {
-	    $table = ":".$table;
-	    
+	    $table = $table;
+
 	    $this->top = $this->model->StatClans($table);
-	    
-	    if ($this->isAjax()) 
+
+	    if ($this->isAjax())
 	    {
 	        $this->redrawControl('topclans');
 	    }
-    
+
     }
 
-	public function handlekampan() {		
-		
+	public function handlekampan() {
+
 		$clans = $this->model->Kampan()->fetchAll();
 
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($clans));
@@ -69,30 +69,30 @@ class RebricekKlanyPresenter extends BasePresenter
 		$post 		= $request->getPost();
 
 		$count 		= $this->model->Wn8ClansCount()->fetchAll();
-		
+
 		$draw 			= $post["draw"];
 		$iDisplayStart 	= $post["start"]; // offset
 		$iDisplayLength = $post["length"]; // limit
 		$search 		= $post["search"]["value"];
 
 		$wn = array();
-		$wn["draw"] 			= $draw; 
+		$wn["draw"] 			= $draw;
 		$wn["recordsTotal"] 	= $count[0]['count'];
 		$wn["recordsFiltered"]  = $count[0]['count'];
 		$wn["aaData"] = $this->model->wn8clan($iDisplayStart,$iDisplayLength);
 
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($wn) );
 	}
-	
-	
+
+
 	public function renderDefault($table)
 	{
 		$this->SaveRequest();
 		$this->template->pokus 		= $this->Pokus();
 		$this->template->data       = $this->Top();
-		
 
-		if ($table === NULL) 
+
+		if ($table === NULL)
 		{
             $this->template->topgr 	= $this->Top();
         }
@@ -137,11 +137,11 @@ class RebricekKlanyPresenter extends BasePresenter
 		if($this->isKlan == 1)
 		{
 			$id = $this->model->GetId($this->data);
-			$this->clan_id = $id; 
+			$this->clan_id = $id;
 			$this->getHistoryData($id);
 		}
-	
-		if ($this->isAjax()) 
+
+		if ($this->isAjax())
               {$this->invalidateControl('grafy');}
 	}
 
@@ -151,7 +151,7 @@ class RebricekKlanyPresenter extends BasePresenter
 		if($this->isKlan == 0)
 			{$this->isKlan = 'Klan nie je v databaze';}
 
-		if ($this->isAjax()) 
+		if ($this->isAjax())
 			{$this->invalidateControl('isklan');}
 	}
 
@@ -169,7 +169,7 @@ class RebricekKlanyPresenter extends BasePresenter
 
 	public function renderWn8random()
 	{
-		
+
 	}
 
 	function renderHistory()
