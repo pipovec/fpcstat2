@@ -1,0 +1,168 @@
+{block head}
+<title>Vojáci štěstěny | FPCSTAT</title>
+<meta name="Keywords" content="WOT,Vojáci štěstěny,Soldiers of fortune,CZ/SK Alley of fame, kampan, world of tanks">
+<meta name="Description" content="Ulicka slavy ceskych a slovenskych klanov v kampani Vojáci štěstěny">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300"> 
+
+{/block}
+
+
+{block content}
+<div class="col-sm-12" style="margin-top:30px;">
+	<h4 class="page-header"> Rebríčky Českých a Slovenských klanov v kampani Vojáci štěstěny /Soldiers of fortune/</h4>
+   
+</div>
+<div class="row"> 
+    <div class="col-sm-11 table-responsive" style="font-family: Roboto; text-align: center;">
+            <table class="table table-striped table-condensed text-center">
+                <thead>
+                <tr>
+                    <th style="text-align: center;font-size: 0.8em">Award level</th>
+                    <th style="text-align: center;font-size: 0.8em">Battle fame point</th>                                
+                    <th style="text-align: center;font-size: 0.8em">Name</th>
+                    <th style="text-align: center;font-size: 0.8em">Rank</th>
+                    <th style="text-align: center;font-size: 0.8em">Rank delta</th>
+                    <th style="text-align: center;font-size: 0.8em">Tag</th>
+                    <th style="text-align: center;font-size: 0.8em">task_fame_points</th>
+                    <th style="text-align: center;font-size: 0.8em">total_fame_points</th>
+                    <th style="text-align: center;font-size: 0.8em">updated_at</th>
+                </thead>
+                <tbody id="sto"></tbody>
+                <tbody id="dvesto"></tbody>
+                <tbody id="tristo"></tbody>
+                <tbody id="styristo"></tbody>
+                <tbody id="patsto"></tbody>                        
+            </table>
+    </div>            
+</div>
+
+<script >
+        $(document).ready(function(){
+            
+            var clans = [];
+            $.ajax({
+                type:"GET",
+                url: "/json/cs_klany.json" /*{link kampan!}*/,
+                dataType: "json",
+                success: function(data) {
+                   $.each(data , function(key,value){
+                       clans[key] = value["clan_id"];                       
+                   });
+                }
+            });
+            
+            
+            function Search(integer) {
+                var count = clans.length;
+                for(var i = 0; i < count; i ++) {
+                    if(clans[i] === integer) { return true; }
+                }
+                return false;
+            }
+           
+            
+            $.get({
+            url: "https://api.worldoftanks.eu/wot/globalmap/eventrating/?application_id=883ff6ceefb13177357ffea34d6fb06f&event_id=soldiers_of_fortune&front_id=soldiers_of_fortune_bg&page_no=1&limit=100",
+            type: "POST",            
+                success: function (result) {  
+                $.each(result["data"],function(key,value){
+                
+                if(Search(value["clan_id"])) {
+                    var d =  new Date(value["updated_at"]*1000);                     
+                    
+                    $("#sto").append("<tr><td>"+value["award_level"]+".</td><td>"+value["battle_fame_points"]+"</td><td>"+value["name"]+"</td>"
+                    +"<td>"+value["rank"]+"</td><td>"+value["rank_delta"]+"</td><td>"+value["tag"]+"</td><td>"+value["task_fame_points"]+"</td>"
+                    +"<td>"+value["total_fame_points"]+"</td><td>"+ d.toLocaleDateString()+"  "+ d.toLocaleTimeString() +"</td></tr>" ); 
+                }
+            });
+           
+                } 
+            });
+         
+            $.get({
+               url: "https://api.worldoftanks.eu/wot/globalmap/eventrating/?application_id=883ff6ceefb13177357ffea34d6fb06f&event_id=soldiers_of_fortune&front_id=soldiers_of_fortune_bg&page_no=2&limit=100",
+            type: "POST",            
+                success: function (result) { 
+               
+                $.each(result["data"],function(key,value){
+                
+                if(Search(value["clan_id"])) {
+                    var d =  new Date(value["updated_at"]*1000);                     
+                    
+                    $("#dvesto").append("<tr><td>"+value["award_level"]+".</td><td>"+value["battle_fame_points"]+"</td><td>"+value["name"]+"</td>"
+                    +"<td>"+value["rank"]+"</td><td>"+value["rank_delta"]+"</td><td>"+value["tag"]+"</td><td>"+value["task_fame_points"]+"</td>"
+                    +"<td>"+value["total_fame_points"]+"</td><td>"+ d.toLocaleDateString()+"  "+ d.toLocaleTimeString()+"</td></tr>" ); 
+                }
+            });
+           
+                } 
+            });
+         
+         
+            $.get({
+               url: "https://api.worldoftanks.eu/wot/globalmap/eventrating/?application_id=883ff6ceefb13177357ffea34d6fb06f&event_id=soldiers_of_fortune&front_id=soldiers_of_fortune_bg&page_no=3&limit=100",
+            type: "POST",            
+                success: function (result) {                                              
+                
+               
+                $.each(result["data"],function(key,value){
+                
+                if(Search(value["clan_id"])) {
+                    var d =  new Date(value["updated_at"]*1000);                     
+                    
+                    $("#tristo").append("<tr><td>"+value["award_level"]+".</td><td>"+value["battle_fame_points"]+"</td><td>"+value["name"]+"</td>"
+                    +"<td>"+value["rank"]+"</td><td>"+value["rank_delta"]+"</td><td>"+value["tag"]+"</td><td>"+value["task_fame_points"]+"</td>"
+                    +"<td>"+value["total_fame_points"]+"</td><td>"+ d.toLocaleDateString()+"  "+ d.toLocaleTimeString()+"</td></tr>" ); 
+                }
+            });
+           
+                } 
+            });
+         
+            
+         
+            $.get({
+               url: "https://api.worldoftanks.eu/wot/globalmap/eventrating/?application_id=883ff6ceefb13177357ffea34d6fb06f&event_id=soldiers_of_fortune&front_id=soldiers_of_fortune_bg&page_no=4&limit=100",
+            type: "POST",            
+                success: function (result) {                              
+               
+                $.each(result["data"],function(key,value){
+                
+                if(Search(value["clan_id"])) {
+                    var d =  new Date(value["updated_at"]*1000);                     
+                    
+                    $("#styristo").append("<tr><td>"+value["award_level"]+".</td><td>"+value["battle_fame_points"]+"</td><td>"+value["name"]+"</td>"
+                    +"<td>"+value["rank"]+"</td><td>"+value["rank_delta"]+"</td><td>"+value["tag"]+"</td><td>"+value["task_fame_points"]+"</td>"
+                    +"<td>"+value["total_fame_points"]+"</td><td>"+ d.toLocaleDateString()+"  "+ d.toLocaleTimeString()+"</td></tr>" ); 
+                }
+            });
+           
+                } 
+            });
+            $.get({
+               url: "https://api.worldoftanks.eu/wot/globalmap/eventrating/?application_id=883ff6ceefb13177357ffea34d6fb06f&event_id=soldiers_of_fortune&front_id=soldiers_of_fortune_bg&page_no=5&limit=100",
+            type: "POST",            
+                success: function (result) {                              
+               console.log(result);
+                
+               
+                $.each(result["data"],function(key,value){
+                
+                if(Search(value["clan_id"])) {
+                    var d =  new Date(value["updated_at"]*1000);                     
+                    
+                    $("#patsto").append("<tr><td>"+value["award_level"]+".</td><td>"+value["battle_fame_points"]+"</td><td>"+value["name"]+"</td>"
+                    +"<td>"+value["rank"]+"</td><td>"+value["rank_delta"]+"</td><td>"+value["tag"]+"</td><td>"+value["task_fame_points"]+"</td>"
+                    +"<td>"+value["total_fame_points"]+"</td><td>"+ d.toLocaleDateString()+"  "+ d.toLocaleTimeString()+"</td></tr>" ); 
+                }
+            });
+           
+                } 
+            });
+         
+            
+            
+            
+        });
+    </script>
+{/block}
